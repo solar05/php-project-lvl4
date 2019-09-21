@@ -2,9 +2,6 @@ language: php
 php:
   - '7.3'
 
-before_script:
-  - cp .env.travis .env
-
 install:
   - composer self-update
   - make install
