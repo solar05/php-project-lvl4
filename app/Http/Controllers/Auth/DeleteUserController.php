@@ -22,5 +22,4 @@ class DeleteUserController extends Controller
         }
         return redirect($this->redirectTo)->with('status', 'Account succesfully deleted!');
     }
-
 }

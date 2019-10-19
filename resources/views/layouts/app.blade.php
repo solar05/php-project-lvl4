@@ -50,7 +50,7 @@
                             @endif
                         @else
                             <li class="nav-item dropdown">
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                <a id="navbarDropdown" class="nav-link label-primary label" href="{{ route('account') }}" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     {{ Auth::user()->name }} <span class="caret"></span>
                                 </a>
 
@@ -74,10 +74,15 @@
 
         <main class="py-4">
             @if (session('status'))
-                <div class="alert alert-success">
+                <div class="alert alert-success" role="alert">
                     {{ session('status') }}
                 </div>
             @endif
+                @if (session('errors'))
+                    <div class="alert alert-danger" role="alert">
+                        {{ session('errors') }}
+                    </div>
+                @endif
             @yield('content')
         </main>
     </div>

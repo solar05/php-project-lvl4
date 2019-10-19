@@ -12,7 +12,7 @@
                     You are logged in!
                 </div>
             </div>
-            <form action="/home/delete" method="post">
+            <form action="{{ route('delete') }}" method="post">
                 @method('delete')
                 @csrf
                 <input class="btn-danger btn-block" type="submit" value="Delete account" data-confirm="Are you sure you want to delete account?">
