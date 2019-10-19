@@ -8,15 +8,15 @@
                 <div class="card-header">Dashboard</div>
 
                 <div class="card-body">
-                    @if (session('status'))
-                        <div class="alert alert-success" role="alert">
-                            {{ session('status') }}
-                        </div>
-                    @endif
 
                     You are logged in!
                 </div>
             </div>
+            <form action="/home/delete" method="post">
+                @method('delete')
+                @csrf
+                <input class="btn-danger btn-block" type="submit" value="Delete account" data-confirm="Are you sure you want to delete account?">
+            </form>
         </div>
     </div>
 </div>

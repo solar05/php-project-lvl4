@@ -82,10 +82,6 @@
                 <div class="title m-b-md">
                     Laravel
                 </div>
-                <select>
-                    <option id="test">Something</option>
-                    <option id="jest">And one more</option>
-                </select>
                 <div class="links">
                     <a href="https://laravel.com/docs">Docs</a>
                     <a href="https://laracasts.com">Laracasts</a>

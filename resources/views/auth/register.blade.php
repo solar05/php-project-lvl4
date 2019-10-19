@@ -8,7 +8,7 @@
                 <div class="card-header">{{ __('Register') }}</div>
 
                 <div class="card-body">
-                    <form method="POST" data-confirm="Are you sure you want to submit?" action="{{ route('register') }}">
+                    <form method="POST" data-confirm="Are you sure you want to register?" action="{{ route('register') }}">
                         @csrf
 
                         <div class="form-group row">
