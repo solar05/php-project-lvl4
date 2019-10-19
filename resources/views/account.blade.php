@@ -20,7 +20,7 @@
                 <div class="card">
                     <div class="card-header">Update account info</div>
                     <div class="card-body">
-                        <form method="post" action="{{ route('account_update') }}">
+                        <form method="post" action="{{ route('user.update') }}">
                             @method('patch')
                             @csrf
                             <table class="table">
@@ -46,7 +46,7 @@
             <div class="card">
                 <div class="card-header">Delete account</div>
                 <div class="card-body">
-                    <form action="{{ route('delete') }}" method="post">
+                    <form action="{{ route('user.delete') }}" method="post">
                         @method('delete')
                         @csrf
                         <input class="btn btn-danger btn-block" type="submit" value="Delete account" data-confirm="Are you sure you want to delete account?">

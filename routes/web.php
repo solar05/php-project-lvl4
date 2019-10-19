@@ -19,8 +19,8 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::get('/account', 'AccountController@index')->name('account');
+Route::get('/user', 'Auth\ShowUserController@show')->name('user.show');
 
-Route::patch('/account', 'AccountController@update')->name('account_update');
+Route::patch('/user', 'Auth\UpdateUserController@update')->name('user.update');
 
-Route::delete('/account', 'Auth\DeleteUserController@delete')->name('delete');
+Route::delete('/user', 'Auth\DeleteUserController@delete')->name('user.delete');
