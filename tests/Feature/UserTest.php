@@ -2,7 +2,7 @@
 
 namespace Tests\Feature;
 
-use App\User;
+use Task_Manager\User;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Hash;
