@@ -18,8 +18,8 @@ class DeleteUserController extends Controller
         try {
             $currentUser->delete();
         } catch (\Exception $error) {
-            return redirect($this->redirectTo)->with('status', $error->getMessage());
+            return back()->withErrors([trans('account.failure_delete')]);
         }
-        return redirect($this->redirectTo)->with('status', 'Account succesfully deleted!');
+        return redirect($this->redirectTo)->with('status', trans('account.success_delete'));
     }
 }

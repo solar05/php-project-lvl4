@@ -50,7 +50,7 @@
                             @endif
                         @else
                             <li class="nav-item dropdown">
-                                <a id="navbarDropdown" class="nav-link label-primary label" href="{{ route('user.show') }}" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                <a id="navbarDropdown" class="nav-link label-primary label" href="{{ route('home') }}" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     {{ Auth::user()->name }} <span class="caret"></span>
                                 </a>
 
@@ -78,9 +78,13 @@
                     {{ session('status') }}
                 </div>
             @endif
-                @if (session('errors'))
+                @if($errors->any())
                     <div class="alert alert-danger" role="alert">
-                        {{ session('errors') }}
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
                     </div>
                 @endif
             @yield('content')

@@ -24,7 +24,7 @@ class UpdateUserController extends Controller
         ]);
         if ($validator->fails()) {
             $errors = $validator->errors()->all();
-            return redirect(route('user.show'))->with('errors', implode('', $errors));
+            return back()->withErrors($errors);
         }
         $data = $validator->getData();
         if (!empty($data['name'])) {
@@ -36,9 +36,9 @@ class UpdateUserController extends Controller
         try {
             $currentUser->update();
         } catch (QueryException $error) {
-            return redirect(route('user.show'))
-                ->with('errors', 'An account is already registered on the entered email!');
+            return back()
+                ->withErrors([trans('account.failure_update')]);
         }
-        return redirect(route('user.show'))->with('status', 'Account succesfully updated!');
+        return redirect(route('user.show'))->with('status', trans('account.success_update'));
     }
 }

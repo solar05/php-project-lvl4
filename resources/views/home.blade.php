@@ -5,11 +5,15 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">Dashboard</div>
+                <div class="card-header">Home</div>
 
                 <div class="card-body">
 
-                    You are logged in!
+                    You are logged in!<br>
+                    No assigned tasks for you! Hooray!
+                </div>
+                <div class="card-footer">
+                    <a href="{{ route('user.update') }}">Account settings</a>
                 </div>
             </div>
         </div>
