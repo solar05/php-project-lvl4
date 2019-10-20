@@ -72,4 +72,25 @@ class UserTest extends TestCase
             'name' => $userData['name'],
             'email' => $userData['email']]);
     }
+
+    public function testUserDeleting()
+    {
+        $response = $this->actingAs($this->user)->delete(route('user.delete'));
+        $response->assertRedirect(route('login'));
+        $this->assertDatabaseHas('users', [
+            'name' => $this->user['name'], 'email' => $this->user['email']
+        ]);
+    }
+
+    public function testUserUpdate()
+    {
+        $newUserData = ['name' => 'Jane Doe', 'email' => 'jane@example.test'];
+        $response = $this->actingAs($this->user)->patch(route('user.update'), $newUserData);
+        $response->assertRedirect(route('user.show'));
+        $this->assertDatabaseHas('users', [
+            'id' => 1,
+            'name' => $newUserData['name'],
+            'email' => $newUserData['email']
+        ]);
+    }
 }
