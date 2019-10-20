@@ -1,8 +1,12 @@
 language: php
 php:
   - '7.3'
+
 services:
   - postgresql
+
+env:
+  - APP_ENV=testing
 
 install:
   - composer self-update
