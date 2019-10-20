@@ -18,5 +18,7 @@ return [
     'settings' => 'Account settings',
     'password' => 'Password',
     'remember' => 'Remember Me',
-    'forgot' => 'Forgot Your Password?'
+    'forgot' => 'Forgot Your Password?',
+    'name' => 'Name',
+    'password_confirm' => 'Confirm Password'
 ];
