@@ -13,7 +13,7 @@ class TaskStatusSeeder extends Seeder
     public function run()
     {
         foreach ($this->statuses as $status) {
-            $dbStatusRecord = new \App\TaskStatus();
+            $dbStatusRecord = new \Task_Manager\TaskStatus();
             $dbStatusRecord->name = $status;
             $dbStatusRecord->save();
         }
