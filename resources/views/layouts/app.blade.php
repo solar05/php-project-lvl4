@@ -52,9 +52,13 @@
                                 <a id="navbarDropdown" class="nav-link label-primary label" href="{{ route('home') }}" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     {{ Auth::user()->name }} <span class="caret"></span>
                                 </a>
-
-
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="{{ route('home') }}">
+                                        {{ (trans('account.home')) }}
+                                    </a>
+                                    <a class="dropdown-item" href="{{ route('user.update') }}">
+                                        {{ (trans('account.settings')) }}
+                                    </a>
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
@@ -66,6 +70,7 @@
                                     </form>
                                 </div>
                             </li>
+                            <a id="task" class="nav-link label-primary label" href="{{ route('task.index') }}" role="button" aria-haspopup="true" aria-expanded="false" v-pre>{{ trans('task.tasks') }}</a>
                         @endguest
                         <div class="nav-item dropdown">
                             <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

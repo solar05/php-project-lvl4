@@ -20,5 +20,6 @@ return [
     'remember' => 'Remember Me',
     'forgot' => 'Forgot Your Password?',
     'name' => 'Name',
-    'password_confirm' => 'Confirm Password'
+    'password_confirm' => 'Confirm Password',
+    'home' => 'Homepage'
 ];

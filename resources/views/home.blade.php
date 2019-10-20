@@ -5,7 +5,7 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">Home</div>
+                <div class="card-header">{{ trans('account.home') }}</div>
 
                 <div class="card-body">
 
@@ -13,7 +13,7 @@
                     No assigned tasks for you! Hooray!
                 </div>
                 <div class="card-footer">
-                    <a href="{{ route('user.update') }}">Account settings</a>
+                    <a href="{{ route('user.update') }}">{{ trans('account.settings') }}</a>
                 </div>
             </div>
         </div>
