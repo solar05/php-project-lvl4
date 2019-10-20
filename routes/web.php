@@ -17,6 +17,8 @@ Route::get('/', function () {
 
 Auth::routes();
 
+Route::get('/locale/{lang}', 'LanguageController@switchLang')->name('locale.switch');
+
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/user', 'Auth\ShowUserController@show')->name('user.show');

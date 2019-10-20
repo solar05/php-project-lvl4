@@ -11,5 +11,6 @@ return [
     'update_acc' => 'Update account info',
     'info_acc' => 'Account info',
     'login_acc' => 'Login',
-    'email_acc' => 'Email'
+    'email_acc' => 'Email',
+    'logout' => 'Logout'
 ];
