@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Providers;
+namespace Task_Manager\Providers;
 
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;

@@ -1,7 +1,7 @@
 <?php
 
 
-namespace App\Http\Controllers;
+namespace Task_Manager\Http\Controllers;
 
 class LocaleController extends Controller
 {

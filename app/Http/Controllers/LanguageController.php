@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
-use App\Http\Controllers\Controller;
-use App\Http\Requests;
+namespace Task_Manager\Http\Controllers;
+use Task_Manager\Http\Controllers\Controller;
+use Task_Manager\Http\Requests;
 use Config;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;

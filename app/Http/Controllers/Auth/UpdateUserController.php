@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\Controllers\Auth;
+namespace Task_Manager\Http\Controllers\Auth;
 
 use Illuminate\Database\QueryException;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Validator;
-use App\Http\Controllers\Controller;
+use Task_Manager\Http\Controllers\Controller;
 
 class UpdateUserController extends Controller
 {

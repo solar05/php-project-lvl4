@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace Task_Manager;
 
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;

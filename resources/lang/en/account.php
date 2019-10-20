@@ -12,5 +12,11 @@ return [
     'info_acc' => 'Account info',
     'login_acc' => 'Login',
     'email_acc' => 'Email',
-    'logout' => 'Logout'
+    'logout' => 'Logout',
+    'register' => 'Register',
+    'sign_in' => 'Sign in',
+    'settings' => 'Account settings',
+    'password' => 'Password',
+    'remember' => 'Remember Me',
+    'forgot' => 'Forgot Your Password?'
 ];
