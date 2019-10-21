@@ -14,6 +14,6 @@ install:
 
 before_script:
   - psql -c 'create database travis_ci_test;' -U postgres
-  - php artisan migrate:refresh --seed --no-interaction -vvv
+  - php artisan migrate --seed --no-interaction -vvv
 
 script: make lint test
