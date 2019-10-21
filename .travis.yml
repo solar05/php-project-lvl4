@@ -6,11 +6,12 @@ services:
   - postgresql
 
 env:
-  - APP_ENV=testing
-  - DB_NAME=travis_ci_test
-  - DB_USERNAME=postgres
-  - DB_PORT=5432
-  - DB_CONNECTION=pgsql
+    global:
+      - APP_ENV=testing
+      - DB_NAME=travis_ci_test
+      - DB_USERNAME=postgres
+      - DB_PORT=5432
+      - DB_CONNECTION=pgsql
 
 install:
   - composer self-update
