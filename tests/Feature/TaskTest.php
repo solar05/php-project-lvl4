@@ -71,5 +71,4 @@ class TaskTest extends TestCase
             'description' => $this->task->description
         ]);
     }
-    
 }
