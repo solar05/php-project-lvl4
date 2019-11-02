@@ -58,7 +58,7 @@ class TaskTest extends TestCase
 
     public function testTaskShow()
     {
-        $response = $this->actingAs($this->user)->get(route('task.show', $this->task->id));
+        $response = $this->actingAs($this->user)->get(route('tasks.show', $this->task->id));
         $response->assertOk();
     }
 

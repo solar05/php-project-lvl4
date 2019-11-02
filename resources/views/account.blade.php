@@ -30,7 +30,7 @@
                 <div class="card">
                     <div class="card-header">{{ trans('account.update_acc') }}</div>
                     <div class="card-body">
-                        <form method="post" action="{{ route('user.update') }}">
+                        <form method="post" action="{{ route('users.update') }}">
                             @method('patch')
                             @csrf
                             <table class="table">

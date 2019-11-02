@@ -15,7 +15,7 @@
                         @foreach($userTasks as $task)
                                 <tr>
                                 <td>
-                                    <h5><a href="{{ route('task.show', $task['id']) }}">{{ $task['name'] }}</a></h5></td>
+                                    <h5><a href="{{ route('tasks.show', $task['id']) }}">{{ $task['name'] }}</a></h5></td>
                                     <td align="right">@include('layouts.state', ['state' => $task['status_id']])</td>
                                 </tr>
                         @endforeach

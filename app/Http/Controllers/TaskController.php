@@ -140,7 +140,7 @@ class TaskController extends Controller
         } else {
             $requestedTask->save();
         }
-        return redirect(route('task.show', $id))->with('status', trans('task.updated'));
+        return redirect(route('tasks.show', $id))->with('status', trans('task.updated'));
     }
 
     /**
@@ -162,6 +162,6 @@ class TaskController extends Controller
         $newState = TaskStatus::proceedToNextState($requestedTask['status_id']);
         $requestedTask->status()->associate($newState);
         $requestedTask->save();
-        return redirect(route('task.show', $id))->with('status', trans('task.proceeded'));
+        return redirect(route('tasks.show', $id))->with('status', trans('task.proceeded'));
     }
 }

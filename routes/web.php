@@ -23,13 +23,13 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/user/{id}', 'Auth\ShowUserController@show')->name('users.show');
 
-Route::patch('/user', 'Auth\UpdateUserController@update')->name('user.update');
+Route::patch('/user', 'Auth\UpdateUserController@update')->name('users.update');
 
 Route::delete('/user', 'Auth\DeleteUserController@delete')->name('users.delete');
 
 Route::get('/tasks', 'TaskController@index')->name('tasks.index');
 
-Route::get('/task/{id}', 'TaskController@show')->name('task.show');
+Route::get('/task/{id}', 'TaskController@show')->name('tasks.show');
 
 Route::delete('/tasks/{id}', 'TaskController@destroy')->name('tasks.destroy');
 

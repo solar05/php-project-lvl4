@@ -15,7 +15,7 @@
         @foreach($tasks as $task)
         <tr>
             <th scope="row">{{ $task['id'] }}</th>
-            <td><a href="{{ route('task.show', $task['id']) }}">{{ $task['name'] }}</a></td>
+            <td><a href="{{ route('tasks.show', $task['id']) }}">{{ $task['name'] }}</a></td>
             <td>@include('layouts.state', ['state' => $task['status_id']])</td>
             <td><a href="{{ route('users.show', $task['assigned_to_id']) }}">{{ $task['assigned_to_id'] }}</a></td>
             <td><a href="{{ route('users.show', $task['creator_id']) }}">{{ $task['creator_id']  }}</a></td>

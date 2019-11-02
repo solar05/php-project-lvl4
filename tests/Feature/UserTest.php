@@ -85,7 +85,7 @@ class UserTest extends TestCase
     public function testUserUpdate()
     {
         $newUserData = ['name' => 'Jane Doe', 'email' => 'jane@example.test'];
-        $response = $this->actingAs($this->user)->patch(route('user.update'), $newUserData);
+        $response = $this->actingAs($this->user)->patch(route('users.update'), $newUserData);
         $response->assertRedirect(route('users.show', $this->user->id));
         $this->assertDatabaseHas('users', [
             'name' => $newUserData['name'],
