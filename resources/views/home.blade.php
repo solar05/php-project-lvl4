@@ -25,7 +25,7 @@
                     @endif
                 </div>
                 <div class="card-footer">
-                    <a href="{{ route('user.show', Auth::user()) }}">{{ trans('account.settings') }}</a>
+                    <a href="{{ route('users.show', Auth::user()) }}">{{ trans('account.settings') }}</a>
                 </div>
             </div>
             <div class="card">

@@ -54,7 +54,7 @@ class UserTest extends TestCase
 
     public function testUserShow()
     {
-        $response = $this->actingAs($this->user)->get(route('user.show', $this->user->id));
+        $response = $this->actingAs($this->user)->get(route('users.show', $this->user->id));
         $response->assertOk();
     }
 
@@ -86,7 +86,7 @@ class UserTest extends TestCase
     {
         $newUserData = ['name' => 'Jane Doe', 'email' => 'jane@example.test'];
         $response = $this->actingAs($this->user)->patch(route('user.update'), $newUserData);
-        $response->assertRedirect(route('user.show', $this->user->id));
+        $response->assertRedirect(route('users.show', $this->user->id));
         $this->assertDatabaseHas('users', [
             'name' => $newUserData['name'],
             'email' => $newUserData['email']

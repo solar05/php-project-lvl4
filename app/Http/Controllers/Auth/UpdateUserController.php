@@ -39,6 +39,6 @@ class UpdateUserController extends Controller
             return back()
                 ->withErrors([trans('account.failure_update')]);
         }
-        return redirect(route('user.show', $currentUser['id']))->with('status', trans('account.success_update'));
+        return redirect(route('users.show', $currentUser['id']))->with('status', trans('account.success_update'));
     }
 }

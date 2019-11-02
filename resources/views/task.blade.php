@@ -20,12 +20,12 @@
         </tr>
             <tr>
                 <th>
-                    {{trans('task.creator')}}: <a href="{{route('user.show', $creator['id'])}}">{{ $creator['name']}}</a>
+                    {{trans('task.creator')}}: <a href="{{route('users.show', $creator['id'])}}">{{ $creator['name']}}</a>
                 </th>
             </tr>
             <tr>
                 <th>
-                    {{trans('task.assigned')}}: <a href="{{route('user.show', $performer['id'])}}">{{ $performer['name']}}</a>
+                    {{trans('task.assigned')}}: <a href="{{route('users.show', $performer['id'])}}">{{ $performer['name']}}</a>
                 </th>
             </tr>
         </table>

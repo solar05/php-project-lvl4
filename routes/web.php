@@ -21,7 +21,7 @@ Route::get('/locale/{lang}', 'LanguageController@switchLang')->name('locale.swit
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::get('/user/{id}', 'Auth\ShowUserController@show')->name('user.show');
+Route::get('/user/{id}', 'Auth\ShowUserController@show')->name('users.show');
 
 Route::patch('/user', 'Auth\UpdateUserController@update')->name('user.update');
 

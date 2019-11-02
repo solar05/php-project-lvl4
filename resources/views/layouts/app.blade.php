@@ -56,7 +56,7 @@
                                     <a class="dropdown-item" href="{{ route('home') }}">
                                         {{ (trans('account.home')) }}
                                     </a>
-                                    <a class="dropdown-item" href="{{ route('user.show', \Illuminate\Support\Facades\Auth::user()) }}">
+                                    <a class="dropdown-item" href="{{ route('users.show', \Illuminate\Support\Facades\Auth::user()) }}">
                                         {{ (trans('account.settings')) }}
                                     </a>
                                     <a class="dropdown-item" href="{{ route('logout') }}"
