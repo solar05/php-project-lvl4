@@ -70,7 +70,7 @@
                                     </form>
                                 </div>
                             </li>
-                            <a id="task" class="nav-link label-primary label" href="{{ route('task.index') }}" role="button" aria-haspopup="true" aria-expanded="false" v-pre>{{ trans('task.tasks') }}</a>
+                            <a id="task" class="nav-link label-primary label" href="{{ route('tasks.index') }}" role="button" aria-haspopup="true" aria-expanded="false" v-pre>{{ trans('task.tasks') }}</a>
                         @endguest
                         <div class="nav-item dropdown">
                             <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

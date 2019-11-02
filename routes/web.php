@@ -25,9 +25,9 @@ Route::get('/user/{id}', 'Auth\ShowUserController@show')->name('user.show');
 
 Route::patch('/user', 'Auth\UpdateUserController@update')->name('user.update');
 
-Route::delete('/user', 'Auth\DeleteUserController@delete')->name('user.delete');
+Route::delete('/user', 'Auth\DeleteUserController@delete')->name('users.delete');
 
-Route::get('/tasks', 'TaskController@index')->name('task.index');
+Route::get('/tasks', 'TaskController@index')->name('tasks.index');
 
 Route::get('/task/{id}', 'TaskController@show')->name('task.show');
 

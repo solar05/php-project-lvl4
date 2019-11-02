@@ -58,7 +58,7 @@
             <div class="card">
                 <div class="card-header">{{ trans('account.delete_acc') }}</div>
                 <div class="card-body">
-                    <form action="{{ route('user.delete') }}" method="post">
+                    <form action="{{ route('users.delete') }}" method="post">
                         @method('delete')
                         @csrf
                         <input class="btn btn-danger btn-block" type="submit" value="{{ trans('account.delete_btn') }}" data-confirm="{{ trans('account.delete') }}">

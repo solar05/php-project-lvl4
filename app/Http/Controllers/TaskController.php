@@ -71,7 +71,7 @@ class TaskController extends Controller
         foreach ($preparedTags as $tag) {
             $task->tags()->attach($tag->id);
         }
-        return redirect(route('task.index'))->with('status', trans('task.created'));
+        return redirect(route('tasks.index'))->with('status', trans('task.created'));
     }
 
     /**
@@ -153,7 +153,7 @@ class TaskController extends Controller
     {
         $requestedTask = Task::findOrFail($id);
         $requestedTask->delete();
-        return redirect(route('task.index'))->with('status', trans('task.deleted'));
+        return redirect(route('tasks.index'))->with('status', trans('task.deleted'));
     }
 
     public function proceed($id)

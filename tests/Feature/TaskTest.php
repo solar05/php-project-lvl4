@@ -42,7 +42,7 @@ class TaskTest extends TestCase
 
     public function testTaskIndex()
     {
-        $response = $this->actingAs($this->user)->get(route('task.index'));
+        $response = $this->actingAs($this->user)->get(route('tasks.index'));
         $response->assertOk();
     }
 
