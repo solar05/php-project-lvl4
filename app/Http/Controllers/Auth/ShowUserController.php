@@ -3,7 +3,8 @@
 namespace Task_Manager\Http\Controllers\Auth;
 
 use Task_Manager\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Auth;
+use Task_Manager\Task;
+use Task_Manager\User;
 
 class ShowUserController extends Controller
 {
@@ -12,12 +13,14 @@ class ShowUserController extends Controller
         $this->middleware('auth');
     }
 
-    public function show()
+    public function show($id)
     {
-        $currentUser = Auth::user();
+        $user = User::where('id', $id)->first();
+        $completedTasksCount = Task::getCompletedUserTasksCount($user['id']);
         return view('account')->with([
-            'userName' => $currentUser->name,
-            'userEmail' => $currentUser->email
+            'userName' => $user->name,
+            'userEmail' => $user->email,
+            'completedTasksCount' => $completedTasksCount
         ]);
     }
 }

@@ -4,31 +4,24 @@
     <table class="table">
         <thead>
         <tr>
-            <th scope="col">#</th>
-            <th scope="col">First</th>
-            <th scope="col">Last</th>
-            <th scope="col">Handle</th>
+            <th scope="col">{{ trans('task.id') }}</th>
+            <th scope="col">{{ trans('task.name') }}</th>
+            <th scope="col">{{ trans('task.state') }}</th>
+            <th scope="col">{{ trans('task.assigned') }}</th>
+            <th scope="col">{{ trans('task.creator') }}</th>
         </tr>
         </thead>
         <tbody>
+        @foreach($tasks as $task)
         <tr>
-            <th scope="row">1</th>
-            <td>Mark</td>
-            <td>Otto</td>
-            <td>@mdo</td>
+            <th scope="row">{{ $task['id'] }}</th>
+            <td><a href="{{ route('task.show', $task['id']) }}">{{ $task['name'] }}</a></td>
+            <td>@include('layouts.state', ['state' => $task['status_id']])</td>
+            <td><a href="{{ route('user.show', $task['assigned_to_id']) }}">{{ $task['assigned_to_id'] }}</a></td>
+            <td><a href="{{ route('user.show', $task['creator_id']) }}">{{ $task['creator_id']  }}</a></td>
         </tr>
-        <tr>
-            <th scope="row">2</th>
-            <td>Jacob</td>
-            <td>Thornton</td>
-            <td>@fat</td>
-        </tr>
-        <tr>
-            <th scope="row">3</th>
-            <td>Larry</td>
-            <td>the Bird</td>
-            <td>@twitter</td>
-        </tr>
+        @endforeach
         </tbody>
     </table>
+    {{ $tasks->links() }}
 @endsection

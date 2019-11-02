@@ -7,14 +7,24 @@
                 <div class="card">
                     <div class="card-header">{{ trans('account.info_acc') }}</div>
                     <div class="card-body">
-                        <div class="text-center">
-                        <p class="center font-weight-normal">{{ $userName }}</p>
-                        <p class="center font-weight-normal">{{ $userEmail }}</p>
-                        </div>
+                        <table>
+                                <th>{{trans('account.name')}}: {{ $userName }}</th>
+                                <tr>
+                                <th>{{trans('account.email_acc')}}: {{ $userEmail }}</th>
+                                </tr>
+                                <th>{{trans('account.home_tasks_count')}}:
+                                @if($completedTasksCount === 0)
+                                        <span class="badge badge-danger">{{ trans('account.home_no_completed_tasks') }}</span>
+                                @else
+                                        <span class="badge badge-success">{{ $completedTasksCount }}</span>
+                                @endif
+                                </th>
+                        </table>
                     </div>
                 </div>
             </div>
         </div>
+        @if(Auth::user()['id'] == request()->route()->parameters['id'])
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card">
@@ -51,12 +61,13 @@
                     <form action="{{ route('user.delete') }}" method="post">
                         @method('delete')
                         @csrf
-                        <input class="btn btn-danger btn-block" type="submit" value="{{ trans('account.delete_btn') }}" data-confirm="Are you sure you want to delete account?">
+                        <input class="btn btn-danger btn-block" type="submit" value="{{ trans('account.delete_btn') }}" data-confirm="{{ trans('account.delete') }}">
                     </form>
                 </div>
             </div>
             </div>
         </div>
+        @endif
         </div>
     </div>
 @endsection

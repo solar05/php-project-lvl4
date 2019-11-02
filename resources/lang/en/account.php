@@ -1,8 +1,8 @@
 <?php
 
 return [
-    'success' => 'Account succesfully updated!',
-    'failure' => 'An account is already registered on the entered email!',
+    'success_update' => 'Account succesfully updated!',
+    'failure_update' => 'An account is already registered on the entered email!',
     'success_delete' => 'Account succesfully deleted!',
     'failure_delete' => 'An error occurred while account deleting.',
     'update_btn' => 'Update account info',
@@ -21,5 +21,11 @@ return [
     'forgot' => 'Forgot Your Password?',
     'name' => 'Name',
     'password_confirm' => 'Confirm Password',
-    'home' => 'Homepage'
+    'home' => 'Homepage',
+    'home_login' => 'You are logged in!',
+    'home_no_tasks' => 'No assigned tasks for you! Hooray!',
+    'home_tasks' => 'Below are the tasks that You have to complete:',
+    'home_tasks_count' => 'Completed tasks count',
+    'home_no_completed_tasks' => 'no completed tasks :(',
+    'delete' => 'Are you sure you want to delete account?'
 ];

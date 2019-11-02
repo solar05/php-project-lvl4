@@ -21,10 +21,18 @@ Route::get('/locale/{lang}', 'LanguageController@switchLang')->name('locale.swit
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::get('/user', 'Auth\ShowUserController@show')->name('user.show');
+Route::get('/user/{id}', 'Auth\ShowUserController@show')->name('user.show');
 
 Route::patch('/user', 'Auth\UpdateUserController@update')->name('user.update');
 
 Route::delete('/user', 'Auth\DeleteUserController@delete')->name('user.delete');
 
 Route::get('/tasks', 'TaskController@index')->name('task.index');
+
+Route::get('/task/{id}', 'TaskController@show')->name('task.show');
+
+Route::delete('/tasks/{id}', 'TaskController@destroy')->name('tasks.destroy');
+
+Route::post('/tasks', 'TaskController@store')->name('tasks.store');
+
+Route::patch('/task/{id}/proceed', 'TaskController@proceed')->name('task.proceed');
