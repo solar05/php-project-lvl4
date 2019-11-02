@@ -54,7 +54,7 @@
                     <div class="form-group row">
                         <label for="assignedTo" class="col-md-4 col-form-label text-md-right">{{ trans('task.assigned') }}</label>
                         <div class="col-md-6">
-                            <select name="assignedTo">
+                            <select name="assignedTo" class="browser-default custom-select">
                             @foreach($usersNames as $userName)
                                     <option value="{{ $userName }}">{{ $userName }}</option>
                             @endforeach
