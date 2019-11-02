@@ -9,7 +9,7 @@
 
                 <div class="card-body">
                     {{ trans('account.home_login') }}<br>
-                    @isset($userTasks)
+                    @if(count($userTasks) > 0)
                         {{ trans('account.home_tasks') }}
                         <table class="table">
                         @foreach($userTasks as $task)
@@ -19,7 +19,9 @@
                                 </tr>
                         @endforeach
                         </table>
-                    @endisset
+                    @else
+                        {{ trans('account.home_no_tasks') }}
+                    @endif
                 </div>
                 <div class="card-footer">
                     <a href="{{ route('user.show', Auth::user()) }}">{{ trans('account.settings') }}</a>

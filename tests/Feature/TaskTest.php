@@ -71,4 +71,26 @@ class TaskTest extends TestCase
             'description' => $this->task->description
         ]);
     }
+
+    public function testTaskUpdate()
+    {
+        $newUser = factory(User::class, 1)->create()->first();
+        $newTaskData = [
+            'name' => 'New',
+            'description' => 'Changed name',
+            'tags' => 'change',
+            'assignedTo' => $newUser['name']
+        ];
+        $response = $this->actingAs($this->user)->patch(route('tasks.update', $this->task->id), $newTaskData);
+        $response->assertRedirect();
+        $this->assertDatabaseHas('tasks', [
+            'id' => $this->task->id,
+            'name' => $newTaskData['name'],
+            'description' => $newTaskData['description'],
+            'assigned_to_id' => $newUser->id
+        ]);
+        $this->assertDatabaseHas('tags', [
+            'name' => $newTaskData['tags']
+        ]);
+    }
 }

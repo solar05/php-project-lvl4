@@ -16,13 +16,12 @@ class Tag extends Model
     public static function prepareTags(string $tags)
     {
         $preparedTags = explode(' ', $tags);
-        $result = [];
-        foreach ($preparedTags as $tag) {
+        return array_reduce($preparedTags, function ($acc, $tag) {
             $trimmedTag = trim($tag);
             $tagToSave = Tag::firstOrCreate(['name' => mb_strtolower($trimmedTag)]);
             $tagToSave->save();
-            $result[] = $tagToSave;
-        }
-        return $result;
+            $acc[] = $tagToSave;
+            return $acc;
+        }, []);
     }
 }

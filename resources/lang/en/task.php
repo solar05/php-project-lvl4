@@ -17,5 +17,7 @@ return [
     'delete_confirm' => 'Are you sure you want to delete this task?',
     'creating' => 'New task creating',
     'create' => 'Create task',
-    'created' => 'Task created!'
+    'created' => 'Task created!',
+    'update_confirm' => 'Are you sure you want to update this task info?',
+    'updated' => 'Task successfully updated!'
 ];

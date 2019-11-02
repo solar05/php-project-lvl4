@@ -35,4 +35,6 @@ Route::delete('/tasks/{id}', 'TaskController@destroy')->name('tasks.destroy');
 
 Route::post('/tasks', 'TaskController@store')->name('tasks.store');
 
-Route::patch('/task/{id}/proceed', 'TaskController@proceed')->name('task.proceed');
+Route::patch('/task/{id}/proceed', 'TaskController@proceed')->name('tasks.proceed');
+
+Route::patch('/tasks/{id}', 'TaskController@update')->name('tasks.update');

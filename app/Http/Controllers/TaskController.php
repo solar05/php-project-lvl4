@@ -36,7 +36,7 @@ class TaskController extends Controller
      */
     public function create()
     {
-        dump();
+        //
     }
 
     /**
@@ -85,14 +85,12 @@ class TaskController extends Controller
         $requestedTask = Task::where('id', $id)->first();
         $creator = User::where('id', $requestedTask['creator_id'])->first();
         $performer = User::where('id', $requestedTask['assigned_to_id'])->first();
-        $tags = Tag::where('id', $requestedTask['id']);
-        $id = $requestedTask['id'];
-        $tag = Tag::firstOrCreate(['name' => 'some']);
-        //$requestedTask->tags()->attach($tag->id);
+        $usersNames = User::all()->pluck('name')->toArray();
         return view('task', ['task' => $requestedTask,
             'creator' => $creator,
             'performer' => $performer,
-            'tags' => $requestedTask->Tags
+            'tags' => $requestedTask->Tags,
+            'usersNames' => $usersNames
         ]);
     }
 
@@ -116,7 +114,33 @@ class TaskController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $attributes = $request->all();
+        $validator = Validator::make($attributes, [
+            'name' => 'max:255',
+            'description' => 'max:255|nullable',
+            'tags' => 'max:255'
+        ]);
+        if ($validator->fails()) {
+            $errors = $validator->errors()->all();
+            return back()->withErrors($errors);
+        }
+        $requestedTask = Task::findOrFail($id);
+        $requestedTask->fill(['name' => $attributes['name'],
+            'description' => $attributes['description']
+        ]);
+        $userToAssign = User::where('name', '=', $attributes['assignedTo'])->firstOrFail();
+        $requestedTask->assignedTo()->associate($userToAssign['id']);
+        if (!empty($attributes['tags'])) {
+            $preparedTags = Tag::prepareTags(trim($attributes['tags']));
+            $requestedTask->tags()->detach();
+            $requestedTask->save();
+            foreach ($preparedTags as $tag) {
+                $requestedTask->tags()->attach($tag->id);
+            }
+        } else {
+            $requestedTask->save();
+        }
+        return redirect(route('task.show', $id))->with('status', trans('task.updated'));
     }
 
     /**
