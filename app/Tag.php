@@ -25,5 +25,4 @@ class Tag extends Model
         }
         return $result;
     }
-
 }
