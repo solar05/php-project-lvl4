@@ -28,11 +28,13 @@ class HomeController extends Controller
     {
         $user = Auth::user();
         $usersNames = User::all()->pluck('name')->toArray();
+        $statuses = TaskStatus::all();
         $userTasks = Task::where('assigned_to_id', $user['id'])
             ->whereNotIn('status_id', [4])
             ->get();
         return view('home', ['userTasks' => $userTasks,
-            'usersNames' => $usersNames]);
+            'usersNames' => $usersNames,
+            'statuses' => $statuses]);
     }
 
     public function account()

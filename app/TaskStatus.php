@@ -10,7 +10,7 @@ class TaskStatus extends Model
 
     public function tasks()
     {
-        return $this->hasMany('App\Task');
+        return $this->hasMany('Task_Manager\Task', 'status_id');
     }
 
     public static function getCreatedState()
@@ -35,6 +35,9 @@ class TaskStatus extends Model
 
     public static function proceedToNextState($state)
     {
+        if (!in_array($state, [1, 2, 3, 4])) {
+            throw new \Exception('Proceeding of non system statuses is prohibited');
+        }
         $statusMap = [
             '1' => function () {
                 return TaskStatus::getInWorkState();

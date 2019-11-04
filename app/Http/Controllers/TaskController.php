@@ -4,6 +4,7 @@ namespace Task_Manager\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Input;
 use Task_Manager\Tag;
 use Task_Manager\Task;
 use Task_Manager\TaskStatus;
@@ -25,8 +26,16 @@ class TaskController extends Controller
      */
     public function index()
     {
-        $tasks = Task::paginate(15);
-        return view('tasks', ['tasks' => $tasks]);
+        $tasks = Task::getPaginatedAndFilteredTasks();
+        $users = User::has('AssignedTasks')->get();
+        $tags = Tag::has('tasks')->get();
+        $statuses = TaskStatus::has('tasks')->get();
+        return view('tasks', [
+            'tasks' => $tasks,
+            'users' => $users,
+            'tags' => $tags,
+            'statuses' => $statuses
+        ]);
     }
 
     /**
@@ -51,17 +60,21 @@ class TaskController extends Controller
         $validator = Validator::make($attributes, [
             'name' => 'max:255',
             'description' => 'max:255|nullable',
-            'tags' => 'max:255'
+            'tags' => 'max:100'
         ]);
         if ($validator->fails()) {
             $errors = $validator->errors()->all();
             return back()->withErrors($errors);
         }
-        $task = new \Task_Manager\Task();
+        $task = new Task();
         $task->fill(['name' => $attributes['name'],
             'description' => $attributes['description']
         ]);
-        $state = \Task_Manager\TaskStatus::getCreatedState();
+        if (!isset($attributes['status'])) {
+            $state = TaskStatus::getCreatedState();
+        } else {
+            $state = TaskStatus::firstOrCreate(['name' => $attributes['status']]);
+        }
         $preparedTags = Tag::prepareTags(trim($attributes['tags']));
         $task->status()->associate($state);
         $task->creator()->associate(Auth::user()['id']);
@@ -86,11 +99,13 @@ class TaskController extends Controller
         $creator = User::where('id', $requestedTask['creator_id'])->first();
         $performer = User::where('id', $requestedTask['assigned_to_id'])->first();
         $usersNames = User::all()->pluck('name')->toArray();
+        $statuses = TaskStatus::all();
         return view('task', ['task' => $requestedTask,
             'creator' => $creator,
             'performer' => $performer,
             'tags' => $requestedTask->Tags,
-            'usersNames' => $usersNames
+            'usersNames' => $usersNames,
+            'statuses' => $statuses
         ]);
     }
 
@@ -118,7 +133,7 @@ class TaskController extends Controller
         $validator = Validator::make($attributes, [
             'name' => 'max:255',
             'description' => 'max:255|nullable',
-            'tags' => 'max:255'
+            'tags' => 'max:100'
         ]);
         if ($validator->fails()) {
             $errors = $validator->errors()->all();
@@ -128,6 +143,10 @@ class TaskController extends Controller
         $requestedTask->fill(['name' => $attributes['name'],
             'description' => $attributes['description']
         ]);
+        if (isset($attributes['status'])) {
+            $state = TaskStatus::firstOrCreate(['name' => $attributes['status']]);
+            $requestedTask->status()->associate($state);
+        }
         $userToAssign = User::where('name', '=', $attributes['assignedTo'])->firstOrFail();
         $requestedTask->assignedTo()->associate($userToAssign['id']);
         if (!empty($attributes['tags'])) {
@@ -158,10 +177,14 @@ class TaskController extends Controller
 
     public function proceed($id)
     {
-        $requestedTask = Task::findOrFail($id);
-        $newState = TaskStatus::proceedToNextState($requestedTask['status_id']);
-        $requestedTask->status()->associate($newState);
-        $requestedTask->save();
+        try {
+            $requestedTask = Task::findOrFail($id);
+            $newState = TaskStatus::proceedToNextState($requestedTask['status_id']);
+            $requestedTask->status()->associate($newState);
+            $requestedTask->save();
+        } catch (\Exception $error) {
+            return back()->withErrors($error->getMessage());
+        }
         return redirect(route('tasks.show', $id))->with('status', trans('task.proceeded'));
     }
 }

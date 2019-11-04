@@ -5,7 +5,7 @@ return [
     'id' => 'ID',
     'name' => 'Task Name',
     'state' => 'Task Status',
-    'assigned' => 'Assigned To',
+    'assigned' => 'Assigned',
     'creator' => 'Creator',
     'description' => 'Description',
     'tags' => 'Tags',
@@ -19,5 +19,11 @@ return [
     'create' => 'Create task',
     'created' => 'Task created!',
     'update_confirm' => 'Are you sure you want to update this task info?',
-    'updated' => 'Task successfully updated!'
+    'updated' => 'Task successfully updated!',
+    'creator_me' => 'Created by me',
+    'all' => 'Show all',
+    'search' => 'Search',
+    'all_states' => 'All states',
+    'all_assigned' => 'All users',
+    'all_tags' => 'All tags'
 ];

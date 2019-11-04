@@ -15,8 +15,8 @@
                         @foreach($userTasks as $task)
                                 <tr>
                                 <td>
-                                    <h5><a href="{{ route('tasks.show', $task['id']) }}">{{ $task['name'] }}</a></h5></td>
-                                    <td align="right">@include('layouts.state', ['state' => $task['status_id']])</td>
+                                    <h5><a href="{{ route('tasks.show', $task->id) }}">{{ $task->name }}</a></h5></td>
+                                    <td align="right">@include('layouts.state', ['stateId' => $task->status_id, 'stateName' => $task->status->name])</td>
                                 </tr>
                         @endforeach
                         </table>
@@ -49,6 +49,17 @@
                         <label for="tags" class="col-md-4 col-form-label text-md-right">{{ trans('task.tags') }}</label>
                         <div class="col-md-6">
                             <input id="tags" type="text" class="form-control" name="tags" required>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="status" class="col-md-4 col-form-label text-md-right">{{ trans('task.state') }}</label>
+                        <div class="col-md-6">
+                            <select name="status" class="browser-default custom-select">
+                                <option selected disabled></option>
+                                @foreach($statuses as $status)
+                                    <option value="{{ $status->name }}">{{ $status->name }}</option>
+                                @endforeach
+                            </select>
                         </div>
                     </div>
                     <div class="form-group row">
