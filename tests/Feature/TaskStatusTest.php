@@ -2,13 +2,11 @@
 
 namespace Tests\Feature;
 
-use Task_Manager\Task;
 use Task_Manager\TaskStatus;
 use Task_Manager\User;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Hash;
-use TaskStatusSeeder;
 
 
 class TaskStatusTest extends TestCase
@@ -62,6 +60,15 @@ class TaskStatusTest extends TestCase
         $response->assertRedirect();
         $this->assertDatabaseMissing('task_statuses', [
             'name' => $this->status->name
+        ]);
+    }
+
+    public function testSystemStatusDestroy()
+    {
+        $response = $this->actingAs($this->user)->delete(route('statuses.destroy', '1'));
+        $response->assertRedirect();
+        $this->assertDatabaseHas('task_statuses', [
+            'name' => 'created'
         ]);
     }
 

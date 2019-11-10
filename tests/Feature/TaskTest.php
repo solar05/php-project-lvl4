@@ -7,7 +7,6 @@ use Task_Manager\User;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Hash;
-use TaskStatusSeeder;
 
 
 class TaskTest extends TestCase

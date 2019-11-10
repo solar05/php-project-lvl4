@@ -4,6 +4,7 @@ namespace Task_Manager\Http\Controllers;
 
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
+use Task_Manager\TaskStatus;
 use Task_Manager\TaskStatus as Status;
 use Illuminate\Support\Facades\Validator;
 
@@ -59,10 +60,9 @@ class TaskStatusController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(TaskStatus $id)
     {
-        $requestedStatus = Status::where('id', $id)->first();
-        return view('status', ['status' => $requestedStatus]);
+        return view('status', ['status' => $id]);
     }
 
     /**
@@ -83,7 +83,7 @@ class TaskStatusController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, TaskStatus $id)
     {
         $attributes = $request->all();
         $validator = Validator::make($attributes, [
@@ -93,11 +93,10 @@ class TaskStatusController extends Controller
             $errors = $validator->errors()->all();
             return back()->withErrors($errors);
         }
-        $requestedStatus = Status::find($id);
-        $requestedStatus->fill([
+        $id->fill([
             'name' => $attributes['name']
         ]);
-        $requestedStatus->save();
+        $id->save();
         return back()->with('status', trans('state.update_success'));
     }
 
@@ -107,14 +106,13 @@ class TaskStatusController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(TaskStatus $id)
     {
-        if (in_array($id, [1, 2, 3, 4])) {
+        if (in_array($id['id'], [1, 2, 3, 4])) {
             return back()->withErrors(trans('state.delete_system'));
         }
-        $requestedStatus = Status::find($id);
         try {
-            $requestedStatus->delete();
+            $id->delete();
         } catch (QueryException $error) {
             return back()->withErrors(trans('state.delete_failed'));
         }

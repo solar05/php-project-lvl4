@@ -15,6 +15,7 @@ return [
     'proceeded' => 'Task status proceeded!',
     'deleted' => 'Task successfully deleted!',
     'delete_confirm' => 'Are you sure you want to delete this task?',
+    'delete_err' => 'An error occurred while deleting task',
     'creating' => 'New task creating',
     'create' => 'Create task',
     'created' => 'Task created!',
