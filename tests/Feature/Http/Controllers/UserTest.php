@@ -4,14 +4,11 @@ namespace Tests\Feature;
 
 use Task_Manager\User;
 use Tests\TestCase;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Hash;
 
 
 class UserTest extends TestCase
 {
-    use RefreshDatabase;
-
     protected $user;
     protected $password;
     protected $userData;

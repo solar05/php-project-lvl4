@@ -5,14 +5,11 @@ namespace Tests\Feature;
 use Task_Manager\TaskStatus;
 use Task_Manager\User;
 use Tests\TestCase;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Hash;
 
 
 class TaskStatusTest extends TestCase
 {
-    use RefreshDatabase;
-
     protected $user;
     protected $password;
     protected $userData;
@@ -29,20 +26,20 @@ class TaskStatusTest extends TestCase
             'password' => Hash::make($this->password)
         ];
         $this->user = factory(User::class)->create($this->userData);
-        $this->seed();
+        $this->actingAs($this->user);
         $this->statusData = ['name' => 'Some status'];
         $this->status = factory(TaskStatus::class, 1)->create()->first();
     }
 
     public function testStatusIndex()
     {
-        $response = $this->actingAs($this->user)->get(route('statuses.index'));
+        $response = $this->get(route('statuses.index'));
         $response->assertOk();
     }
 
     public function testStatusStore()
     {
-        $response = $this->actingAs($this->user)->post(route('statuses.store'), $this->statusData);
+        $response = $this->post(route('statuses.store'), $this->statusData);
         $response->assertRedirect();
         $this->assertDatabaseHas('task_statuses', ['name' => $this->statusData['name']]);
     }
@@ -50,13 +47,13 @@ class TaskStatusTest extends TestCase
 
     public function testStatusShow()
     {
-        $response = $this->actingAs($this->user)->get(route('statuses.show', $this->status->id));
+        $response = $this->get(route('statuses.show', $this->status->id));
         $response->assertOk();
     }
 
     public function testStatusDestroy()
     {
-        $response = $this->actingAs($this->user)->delete(route('statuses.destroy', $this->status->id));
+        $response = $this->delete(route('statuses.destroy', $this->status->id));
         $response->assertRedirect();
         $this->assertDatabaseMissing('task_statuses', [
             'name' => $this->status->name
@@ -65,7 +62,7 @@ class TaskStatusTest extends TestCase
 
     public function testSystemStatusDestroy()
     {
-        $response = $this->actingAs($this->user)->delete(route('statuses.destroy', '1'));
+        $response = $this->delete(route('statuses.destroy', '1'));
         $response->assertRedirect();
         $this->assertDatabaseHas('task_statuses', [
             'name' => 'created'
@@ -78,8 +75,7 @@ class TaskStatusTest extends TestCase
         $newStatusData = [
             'name' => 'Another status'
         ];
-        $response = $this->actingAs($this->user)
-            ->patch(route('statuses.update', $this->status->id), $newStatusData);
+        $response = $this->patch(route('statuses.update', $this->status->id), $newStatusData);
         $response->assertRedirect();
         $this->assertDatabaseHas('task_statuses', [
             'id' => $this->status->id,

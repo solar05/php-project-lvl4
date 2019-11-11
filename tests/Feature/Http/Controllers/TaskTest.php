@@ -5,14 +5,11 @@ namespace Tests\Feature;
 use Task_Manager\Task;
 use Task_Manager\User;
 use Tests\TestCase;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Hash;
 
 
 class TaskTest extends TestCase
 {
-    use RefreshDatabase;
-
     protected $user;
     protected $password;
     protected $userData;
@@ -29,25 +26,25 @@ class TaskTest extends TestCase
             'password' => Hash::make($this->password)
         ];
         $this->user = factory(User::class)->create($this->userData);
-        $this->seed();
         $this->taskData = [
             'name' => 'Test',
             'description' => 'Testing task',
             'tags' => 'TEsT taGS',
             'assignedTo' => $this->user['name']
         ];
+        $this->actingAs($this->user);
         $this->task = factory(Task::class, 1)->create()->first();
     }
 
     public function testTaskIndex()
     {
-        $response = $this->actingAs($this->user)->get(route('tasks.index'));
+        $response = $this->get(route('tasks.index'));
         $response->assertOk();
     }
 
     public function testTaskStore()
     {
-        $response = $this->actingAs($this->user)->post(route('tasks.store'), $this->taskData);
+        $response = $this->post(route('tasks.store'), $this->taskData);
         $response->assertRedirect();
         $this->assertDatabaseHas('tasks', ['name' => 'Test',
             'description' => 'Testing task']);
@@ -57,13 +54,13 @@ class TaskTest extends TestCase
 
     public function testTaskShow()
     {
-        $response = $this->actingAs($this->user)->get(route('tasks.show', $this->task->id));
+        $response = $this->get(route('tasks.show', $this->task->id));
         $response->assertOk();
     }
 
     public function testTaskDestroy()
     {
-        $response = $this->actingAs($this->user)->delete(route('tasks.destroy', $this->task->id));
+        $response = $this->delete(route('tasks.destroy', $this->task->id));
         $response->assertRedirect();
         $this->assertDatabaseMissing('tasks', [
             'name' => $this->task->name,
@@ -80,7 +77,7 @@ class TaskTest extends TestCase
             'tags' => 'change',
             'assignedTo' => $newUser['name']
         ];
-        $response = $this->actingAs($this->user)->patch(route('tasks.update', $this->task->id), $newTaskData);
+        $response = $this->patch(route('tasks.update', $this->task->id), $newTaskData);
         $response->assertRedirect();
         $this->assertDatabaseHas('tasks', [
             'id' => $this->task->id,
