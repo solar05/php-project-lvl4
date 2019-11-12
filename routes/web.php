@@ -21,14 +21,15 @@ Route::get('/locale/{lang}', 'LanguageController@switchLang')->name('locale.swit
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::get('/user/{id}', 'Auth\ShowUserController@show')->name('users.show');
-
-Route::patch('/user', 'Auth\UpdateUserController@update')->name('users.update');
-
-Route::delete('/user', 'Auth\DeleteUserController@delete')->name('users.delete');
-
-Route::patch('/task/{id}/proceed', 'TaskController@proceed')->name('tasks.proceed');
+Route::resource('users', 'UserController')
+    ->only([
+        'show',
+        'update',
+        'destroy'
+    ]);
 
 Route::resource('statuses', 'TaskStatusController');
 
 Route::resource('tasks', 'TaskController');
+
+Route::patch('/task/{id}/proceed', 'TaskController@proceed')->name('tasks.proceed');

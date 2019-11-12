@@ -72,8 +72,8 @@ class UserTest extends TestCase
 
     public function testUserDeleting()
     {
-        $response = $this->actingAs($this->user)->delete(route('users.delete'));
-        $response->assertRedirect(route('login'));
+        $response = $this->actingAs($this->user)->delete(route('users.destroy', $this->user->id));
+        $response->assertRedirect(route('welcome'));
         $this->assertDatabaseHas('users', [
             'name' => $this->user['name'], 'email' => $this->user['email']
         ]);
@@ -82,7 +82,7 @@ class UserTest extends TestCase
     public function testUserUpdate()
     {
         $newUserData = ['name' => 'Jane Doe', 'email' => 'jane@example.test'];
-        $response = $this->actingAs($this->user)->patch(route('users.update'), $newUserData);
+        $response = $this->actingAs($this->user)->patch(route('users.update', $this->user->id), $newUserData);
         $response->assertRedirect(route('users.show', $this->user->id));
         $this->assertDatabaseHas('users', [
             'name' => $newUserData['name'],

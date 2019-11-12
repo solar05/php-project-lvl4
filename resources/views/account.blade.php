@@ -8,9 +8,9 @@
                     <div class="card-header">{{ trans('account.info_acc') }}</div>
                     <div class="card-body">
                         <table>
-                                <th>{{trans('account.name')}}: {{ $userName }}</th>
+                                <th>{{trans('account.name')}}: {{ $user->name }}</th>
                                 <tr>
-                                <th>{{trans('account.email_acc')}}: {{ $userEmail }}</th>
+                                <th>{{trans('account.email_acc')}}: {{ $user->email }}</th>
                                 </tr>
                                 <th>{{trans('account.home_tasks_count')}}:
                                 @if($completedTasksCount === 0)
@@ -24,13 +24,13 @@
                 </div>
             </div>
         </div>
-        @if(Auth::user()['id'] == request()->route()->parameters['id'])
+        @if(Auth::user()['id'] == $user->id)
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card">
                     <div class="card-header">{{ trans('account.update_acc') }}</div>
                     <div class="card-body">
-                        <form method="post" action="{{ route('users.update') }}">
+                        <form method="post" action="{{ route('users.update', $user->id) }}">
                             @method('patch')
                             @csrf
                             <table class="table">
@@ -58,7 +58,7 @@
             <div class="card">
                 <div class="card-header">{{ trans('account.delete_acc') }}</div>
                 <div class="card-body">
-                    <form action="{{ route('users.delete') }}" method="post">
+                    <form action="{{ route('users.destroy', $user->id) }}" method="post">
                         @method('delete')
                         @csrf
                         <input class="btn btn-danger btn-block" type="submit" value="{{ trans('account.delete_btn') }}" data-confirm="{{ trans('account.delete') }}">
