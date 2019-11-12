@@ -14,7 +14,7 @@ class TaskStatusController extends Controller
     {
         $this->middleware('auth');
     }
-    
+
     /**
      * Display a listing of the resource.
      *
@@ -65,9 +65,9 @@ class TaskStatusController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(TaskStatus $id)
+    public function show(TaskStatus $status)
     {
-        return view('status', ['status' => $id]);
+        return view('status', ['status' => $status]);
     }
 
     /**
@@ -88,7 +88,7 @@ class TaskStatusController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, TaskStatus $id)
+    public function update(Request $request, TaskStatus $status)
     {
         $attributes = $request->all();
         $validator = Validator::make($attributes, [
@@ -98,10 +98,10 @@ class TaskStatusController extends Controller
             $errors = $validator->errors()->all();
             return back()->withErrors($errors);
         }
-        $id->fill([
+        $status->fill([
             'name' => $attributes['name']
         ]);
-        $id->save();
+        $status->save();
         return back()->with('status', trans('state.update_success'));
     }
 
@@ -111,13 +111,13 @@ class TaskStatusController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(TaskStatus $id)
+    public function destroy(TaskStatus $status)
     {
-        if (in_array($id['id'], [1, 2, 3, 4])) {
+        if (in_array($status['id'], [1, 2, 3, 4])) {
             return back()->withErrors(trans('state.delete_system'));
         }
         try {
-            $id->delete();
+            $status->delete();
         } catch (QueryException $error) {
             return back()->withErrors(trans('state.delete_failed'));
         }

@@ -27,26 +27,8 @@ Route::patch('/user', 'Auth\UpdateUserController@update')->name('users.update');
 
 Route::delete('/user', 'Auth\DeleteUserController@delete')->name('users.delete');
 
-Route::get('/tasks', 'TaskController@index')->name('tasks.index');
-
-Route::get('/task/{id}', 'TaskController@show')->name('tasks.show');
-
-Route::delete('/tasks/{id}', 'TaskController@destroy')->name('tasks.destroy');
-
-Route::post('/tasks', 'TaskController@store')->name('tasks.store');
-
 Route::patch('/task/{id}/proceed', 'TaskController@proceed')->name('tasks.proceed');
 
-Route::patch('/tasks/{id}', 'TaskController@update')->name('tasks.update');
+Route::resource('statuses', 'TaskStatusController');
 
-Route::post('/statuses', 'TaskStatusController@store');
-
-Route::get('/statuses/{id}', 'TaskStatusController@show')->name('statuses.show');
-
-Route::get('/statuses', 'TaskStatusController@index')->name('statuses.index');
-
-Route::delete('/statuses/{id}', 'TaskStatusController@destroy')->name('statuses.destroy');
-
-Route::patch('/statuses/{id}', 'TaskStatusController@update')->name('statuses.update');
-
-Route::post('/statuses', 'TaskStatusController@store')->name('statuses.store');
+Route::resource('tasks', 'TaskController');

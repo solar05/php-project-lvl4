@@ -93,16 +93,16 @@ class TaskController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Task $id)
+    public function show(Task $task)
     {
-        $creator = User::where('id', $id['creator_id'])->first();
-        $performer = User::where('id', $id['assigned_to_id'])->first();
+        $creator = User::where('id', $task['creator_id'])->first();
+        $performer = User::where('id', $task['assigned_to_id'])->first();
         $usersNames = User::all()->pluck('name')->toArray();
         $statuses = TaskStatus::all();
-        return view('task', ['task' => $id,
+        return view('task', ['task' => $task,
             'creator' => $creator,
             'performer' => $performer,
-            'tags' => $id->Tags,
+            'tags' => $task->Tags,
             'usersNames' => $usersNames,
             'statuses' => $statuses
         ]);
@@ -126,7 +126,7 @@ class TaskController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Task $id)
+    public function update(Request $request, Task $task)
     {
         $attributes = $request->all();
         $validator = Validator::make($attributes, [
@@ -138,26 +138,26 @@ class TaskController extends Controller
             $errors = $validator->errors()->all();
             return back()->withErrors($errors);
         }
-        $id->fill(['name' => $attributes['name'],
+        $task->fill(['name' => $attributes['name'],
             'description' => $attributes['description']
         ]);
         if (isset($attributes['status'])) {
             $state = TaskStatus::firstOrCreate(['name' => $attributes['status']]);
-            $id->status()->associate($state);
+            $task->status()->associate($state);
         }
         $userToAssign = User::where('name', '=', $attributes['assignedTo'])->firstOrFail();
-        $id->assignedTo()->associate($userToAssign['id']);
+        $task->assignedTo()->associate($userToAssign['id']);
         if (!empty($attributes['tags'])) {
             $preparedTags = Tag::prepareTags(trim($attributes['tags']));
-            $id->tags()->detach();
-            $id->save();
+            $task->tags()->detach();
+            $task->save();
             foreach ($preparedTags as $tag) {
-                $id->tags()->attach($tag->id);
+                $task->tags()->attach($tag->id);
             }
         } else {
-            $id->save();
+            $task->save();
         }
-        return redirect(route('tasks.show', $id))->with('status', trans('task.updated'));
+        return redirect(route('tasks.show', $task))->with('status', trans('task.updated'));
     }
 
     /**
@@ -166,10 +166,10 @@ class TaskController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Task $id)
+    public function destroy(Task $task)
     {
         try {
-            $id->delete();
+            $task->delete();
         } catch (\Exception $e) {
             return back()->withErrors(trans('task.delete_err'));
         }
