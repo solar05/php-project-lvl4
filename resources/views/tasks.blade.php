@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
+    <div class="container">
     <form action="{{ route('tasks.index') }}" method="get">
     <div class="form-row">
         <div class="form-group col-md-4">
@@ -50,6 +51,7 @@
         </div>
     </div>
     </form>
+    </div>
     <table class="table">
         <thead>
         <tr>
