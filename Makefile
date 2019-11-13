@@ -8,3 +8,7 @@ run:
 	php artisan serve
 front:
 	npm run dev
+migrate:
+	php artisan migrate
+fresh:
+	php artisan migrate:fresh --seed
