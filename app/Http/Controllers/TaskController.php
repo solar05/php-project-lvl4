@@ -165,16 +165,4 @@ class TaskController extends Controller
         }
         return redirect(route('tasks.index'))->with('status', trans('task.deleted'));
     }
-
-    public function proceed(Task $id)
-    {
-        try {
-            $newState = TaskStatus::proceedToNextState($id->status()->find($id['status_id'])->name);
-            $id->status()->associate($newState);
-            $id->save();
-        } catch (\Exception $error) {
-            return back()->withErrors($error->getMessage());
-        }
-        return redirect(route('tasks.show', $id))->with('status', trans('task.proceeded'));
-    }
 }

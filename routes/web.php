@@ -32,5 +32,3 @@ Route::resources([
     'tasks' => 'TaskController',
     'statuses' => 'TaskStatusController'
 ]);
-
-Route::patch('/task/{id}/proceed', 'TaskController@proceed')->name('tasks.proceed');

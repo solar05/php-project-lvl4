@@ -31,9 +31,6 @@
         </table>
 
     @if(Auth::id() == $creator['id'])
-                @if($task->status_id < 4)
-                    @include('layouts.proceed', ['taskId' => $task['id']])
-                @endif
         </div>
                     <div class="card">
                         <div class="card-header">
@@ -105,9 +102,7 @@
                     </form>
                     </div>
                     </div>
-            @elseif(Auth::id() == $performer->id && $task->status()::isSystemStatus())
-                @include('layouts.proceed', ['taskId' => $task->id])
+        @endif
     </div>
-            @endif
     </div>
 @endsection
