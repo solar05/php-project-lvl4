@@ -82,15 +82,11 @@ class UserController extends Controller
      */
     public function update(Request $request, User $user)
     {
-        $validator = Validator::make($request->all(), [
+        $request->validate([
             'name' => 'max:255|nullable',
             'email' => 'email|nullable'
         ]);
-        if ($validator->fails()) {
-            $errors = $validator->errors()->all();
-            return back()->withErrors($errors);
-        }
-        $data = $validator->getData();
+        $data = $request->all();
         if (!empty($data['name'])) {
             $user->name = $data['name'];
         }
