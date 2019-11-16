@@ -28,8 +28,9 @@ Route::resource('users', 'UserController')
         'destroy'
     ]);
 
-Route::resource('statuses', 'TaskStatusController');
-
-Route::resource('tasks', 'TaskController');
+Route::resources([
+    'tasks' => 'TaskController',
+    'statuses' => 'TaskStatusController'
+]);
 
 Route::patch('/task/{id}/proceed', 'TaskController@proceed')->name('tasks.proceed');

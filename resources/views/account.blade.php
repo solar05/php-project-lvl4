@@ -24,7 +24,7 @@
                 </div>
             </div>
         </div>
-        @if(Auth::user()['id'] == $user->id)
+        @if(Auth::id() == $user->id)
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card">

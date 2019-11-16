@@ -43,14 +43,10 @@ class TaskStatusController extends Controller
      */
     public function store(Request $request)
     {
-        $attributes = $request->all();
-        $validator = Validator::make($attributes, [
+        $request->validate([
             'name' => 'max:15|string'
         ]);
-        if ($validator->fails()) {
-            $errors = $validator->errors()->all();
-            return back()->withErrors($errors);
-        }
+        $attributes = $request->all();
         $status = new Status();
         $status->fill([
             'name' => $attributes['name']
@@ -90,14 +86,10 @@ class TaskStatusController extends Controller
      */
     public function update(Request $request, TaskStatus $status)
     {
-        $attributes = $request->all();
-        $validator = Validator::make($attributes, [
+        $request->validate([
             'name' => 'max:15|string'
         ]);
-        if ($validator->fails()) {
-            $errors = $validator->errors()->all();
-            return back()->withErrors($errors);
-        }
+        $attributes = $request->all();
         $status->fill([
             'name' => $attributes['name']
         ]);
@@ -113,7 +105,7 @@ class TaskStatusController extends Controller
      */
     public function destroy(TaskStatus $status)
     {
-        if (in_array($status['id'], [1, 2, 3, 4])) {
+        if (TaskStatus::isSystemStatus($status['name'])) {
             return back()->withErrors(trans('state.delete_system'));
         }
         try {

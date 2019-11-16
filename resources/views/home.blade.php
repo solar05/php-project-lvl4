@@ -16,7 +16,7 @@
                                 <tr>
                                 <td>
                                     <h5><a href="{{ route('tasks.show', $task->id) }}">{{ $task->name }}</a></h5></td>
-                                    <td align="right">@include('layouts.state', ['stateId' => $task->status_id, 'stateName' => $task->status->name])</td>
+                                    <td align="right">@include('layouts.state', ['status' => $task->status])</td>
                                 </tr>
                         @endforeach
                         </table>

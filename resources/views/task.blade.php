@@ -10,7 +10,7 @@
             <tr><th>
                     {{trans('task.description')}}: {{ $task->description }}
                 </th></tr>
-            <tr><th>{{ trans('task.state') }}: @include('layouts.state', ['stateId' => $task->status_id, 'stateName' => $task->status->name])</th></tr>
+            <tr><th>{{ trans('task.state') }}: @include('layouts.state', ['status' => $task->status])</th></tr>
         <tr>
             <th> {{ trans('task.tags') }}:
         @foreach($tags as $tag)
@@ -30,7 +30,7 @@
             </tr>
         </table>
 
-    @if(Auth::user()['id'] == $creator['id'])
+    @if(Auth::id() == $creator['id'])
                 @if($task->status_id < 4)
                     @include('layouts.proceed', ['taskId' => $task['id']])
                 @endif
@@ -105,7 +105,7 @@
                     </form>
                     </div>
                     </div>
-            @elseif(Auth::user()->id == $performer->id && $task->status_id < 4 )
+            @elseif(Auth::id() == $performer->id && $task->status()::isSystemStatus())
                 @include('layouts.proceed', ['taskId' => $task->id])
     </div>
             @endif

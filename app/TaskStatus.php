@@ -35,23 +35,33 @@ class TaskStatus extends Model
 
     public static function proceedToNextState($state)
     {
-        if (!in_array($state, [1, 2, 3, 4])) {
+        if (!static::isSystemStatus($state)) {
             throw new \Exception('Proceeding of non system statuses is prohibited');
         }
         $statusMap = [
-            '1' => function () {
+            'created' => function () {
                 return TaskStatus::getInWorkState();
             },
-            '2' => function () {
+            'in_work' => function () {
                 return TaskStatus::getTestingState();
             },
-            '3' => function () {
+            'testing' => function () {
                 return TaskStatus::getCompletedState();
             },
-            '4' => function () {
+            'completed' => function () {
                 return TaskStatus::getCompletedState();
             }
         ];
         return $statusMap[$state]();
+    }
+
+    public static function isSystemStatus($state)
+    {
+        return in_array($state, [
+            'created',
+            'in_work',
+            'testing',
+            'completed'
+        ]);
     }
 }

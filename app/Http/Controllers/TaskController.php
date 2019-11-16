@@ -4,12 +4,10 @@ namespace Task_Manager\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Input;
 use Task_Manager\Tag;
 use Task_Manager\Task;
 use Task_Manager\TaskStatus;
 use Task_Manager\User;
-use Illuminate\Support\Facades\Validator;
 
 class TaskController extends Controller
 {
@@ -56,16 +54,12 @@ class TaskController extends Controller
      */
     public function store(Request $request)
     {
-        $attributes = $request->all();
-        $validator = Validator::make($attributes, [
+        $request->validate([
             'name' => 'max:255',
             'description' => 'max:255|nullable',
             'tags' => 'max:100'
         ]);
-        if ($validator->fails()) {
-            $errors = $validator->errors()->all();
-            return back()->withErrors($errors);
-        }
+        $attributes = $request->all();
         $task = new Task();
         $task->fill(['name' => $attributes['name'],
             'description' => $attributes['description']
@@ -95,8 +89,8 @@ class TaskController extends Controller
      */
     public function show(Task $task)
     {
-        $creator = User::where('id', $task['creator_id'])->first();
-        $performer = User::where('id', $task['assigned_to_id'])->first();
+        $creator = User::findOrFail($task['creator_id']);
+        $performer = User::findOrFail($task['assigned_to_id']);
         $usersNames = User::all()->pluck('name')->toArray();
         $statuses = TaskStatus::all();
         return view('task', ['task' => $task,
@@ -128,16 +122,12 @@ class TaskController extends Controller
      */
     public function update(Request $request, Task $task)
     {
-        $attributes = $request->all();
-        $validator = Validator::make($attributes, [
+        $request->validate([
             'name' => 'max:255',
             'description' => 'max:255|nullable',
             'tags' => 'max:100'
         ]);
-        if ($validator->fails()) {
-            $errors = $validator->errors()->all();
-            return back()->withErrors($errors);
-        }
+        $attributes = $request->all();
         $task->fill(['name' => $attributes['name'],
             'description' => $attributes['description']
         ]);
@@ -179,7 +169,7 @@ class TaskController extends Controller
     public function proceed(Task $id)
     {
         try {
-            $newState = TaskStatus::proceedToNextState($id['status_id']);
+            $newState = TaskStatus::proceedToNextState($id->status()->find($id['status_id'])->name);
             $id->status()->associate($newState);
             $id->save();
         } catch (\Exception $error) {
