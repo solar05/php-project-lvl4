@@ -9,7 +9,8 @@
             <th>{{ trans('state.updated_at') }}</th>
             <th><button type="button" class="btn btn-success pull-right" data-toggle="modal" data-target="#exampleModal">
                     {{ trans('state.create') }}
-                </button></th>
+                </button>
+            </th>
     @foreach($statuses as $status)
         <tr>
             <th>{{ $status->id }}</th>
