@@ -32,7 +32,7 @@ class HomeController extends Controller
         $userTasks = Task::where('assigned_to_id', $user['id'])
             ->whereNotIn('status_id', [4])
             ->get();
-        return view('home', ['userTasks' => $userTasks,
+        return view('user.index', ['userTasks' => $userTasks,
             'usersNames' => $usersNames,
             'statuses' => $statuses]);
     }

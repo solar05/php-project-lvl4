@@ -68,7 +68,7 @@
         <tr>
             <th scope="row">{{ $task->id }}</th>
             <td><a href="{{ route('tasks.show', $task) }}">{{ $task->name }}</a></td>
-            <td>@include('layouts.state', ['status' => $task->status])</td>
+            <td>@include('layouts.state', ['statuses.show' => $task->status])</td>
             <td>@foreach($task->tags as $tag)
                     <span class="badge badge-primary">{{ $tag->name }}</span>
                 @endforeach</td>

@@ -9,8 +9,6 @@ use Tests\TestCase;
 class TaskTest extends TestCase
 {
     protected $user;
-    protected $password;
-    protected $userData;
     protected $taskData;
     protected $task;
 

@@ -28,7 +28,7 @@ class TaskController extends Controller
         $users = User::has('AssignedTasks')->get();
         $tags = Tag::has('tasks')->get();
         $statuses = TaskStatus::has('tasks')->get();
-        return view('tasks', [
+        return view('tasks.index', [
             'tasks' => $tasks,
             'users' => $users,
             'tags' => $tags,
@@ -93,7 +93,7 @@ class TaskController extends Controller
         $performer = User::findOrFail($task['assigned_to_id']);
         $usersNames = User::all()->pluck('name')->toArray();
         $statuses = TaskStatus::all();
-        return view('task', ['task' => $task,
+        return view('tasks.show', ['task' => $task,
             'creator' => $creator,
             'performer' => $performer,
             'tags' => $task->Tags,

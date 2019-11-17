@@ -55,7 +55,7 @@ class UserController extends Controller
     public function show(User $user)
     {
         $completedTasksCount = Task::getCompletedUserTasksCount($user['id']);
-        return view('account', [
+        return view('user.show', [
             'user' => $user,
             'completedTasksCount' => $completedTasksCount
         ]);

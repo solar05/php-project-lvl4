@@ -22,7 +22,7 @@ class TaskStatusController extends Controller
     public function index()
     {
         $statuses = Status::paginate(10);
-        return view('statuses', ['statuses' => $statuses]);
+        return view('statuses.index', ['statuses' => $statuses]);
     }
     /**
      * Show the form for creating a new resource.
@@ -57,12 +57,12 @@ class TaskStatusController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  TaskStatus  $status
      * @return \Illuminate\Http\Response
      */
     public function show(TaskStatus $status)
     {
-        return view('status', ['status' => $status]);
+        return view('statuses.show', ['status' => $status]);
     }
 
     /**

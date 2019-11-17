@@ -13,7 +13,7 @@
     @foreach($statuses as $status)
         <tr>
             <th>{{ $status->id }}</th>
-            <td>@include('layouts.state', ['status' => $status])</td>
+            <td>@include('layouts.state', ['statuses.show' => $status])</td>
             <td>{{ $status->created_at }}</td>
             <td>{{ $status->updated_at }}</td>
             <td>
