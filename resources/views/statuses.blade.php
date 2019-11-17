@@ -13,12 +13,12 @@
     @foreach($statuses as $status)
         <tr>
             <th>{{ $status->id }}</th>
-            <td>@include('layouts.state', ['stateId' => $status->id, 'stateName' => $status->name])</td>
+            <td>@include('layouts.state', ['status' => $status])</td>
             <td>{{ $status->created_at }}</td>
             <td>{{ $status->updated_at }}</td>
             <td>
                 @if(!in_array($status->name, ['created', 'in_work', 'testing', 'completed']))
-                    <form action="{{ route('statuses.destroy', $status->id) }}" method="post">
+                    <form action="{{ route('statuses.destroy', $status) }}" method="post">
                         @method('delete')
                         @csrf
                         <input class="btn btn-danger" type="submit" value="{{ trans('state.delete') }}" data-confirm="{{ trans('state.delete_confirm') }}">

@@ -20,12 +20,12 @@
         </tr>
             <tr>
                 <th>
-                    {{trans('task.creator')}}: <a href="{{route('users.show', $creator->id)}}">{{ $creator['name']}}</a>
+                    {{trans('task.creator')}}: <a href="{{route('users.show', $creator)}}">{{ $creator['name']}}</a>
                 </th>
             </tr>
             <tr>
                 <th>
-                    {{trans('task.assigned')}}: <a href="{{route('users.show', $performer->id)}}">{{ $performer['name']}}</a>
+                    {{trans('task.assigned')}}: <a href="{{route('users.show', $performer)}}">{{ $performer['name']}}</a>
                 </th>
             </tr>
         </table>
@@ -37,7 +37,7 @@
                             {{ trans('task.update') }}
                         </div>
                         <div class="card-body">
-                    <form method="POST" action="{{ route('tasks.update', $task->id) }}">
+                    <form method="POST" action="{{ route('tasks.update', $task) }}">
                         @method('patch')
                         @csrf
                             <div class="form-group row">
@@ -95,7 +95,7 @@
                             {{ trans('task.delete') }}
                         </div>
                         <div class="card-body">
-                    <form action="{{ route('tasks.destroy', $task->id) }}" method="post">
+                    <form action="{{ route('tasks.destroy', $task) }}" method="post">
                         @method('delete')
                         @csrf
                         <input class="btn btn-danger btn-block" type="submit" value="{{ trans('task.delete') }}" data-confirm="{{ trans('task.delete_confirm') }}">

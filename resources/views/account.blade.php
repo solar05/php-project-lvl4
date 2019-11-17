@@ -30,7 +30,7 @@
                 <div class="card">
                     <div class="card-header">{{ trans('account.update_acc') }}</div>
                     <div class="card-body">
-                        <form method="post" action="{{ route('users.update', $user->id) }}">
+                        <form method="post" action="{{ route('users.update', $user) }}">
                             @method('patch')
                             @csrf
                             <table class="table">
@@ -58,7 +58,7 @@
             <div class="card">
                 <div class="card-header">{{ trans('account.delete_acc') }}</div>
                 <div class="card-body">
-                    <form action="{{ route('users.destroy', $user->id) }}" method="post">
+                    <form action="{{ route('users.destroy', $user) }}" method="post">
                         @method('delete')
                         @csrf
                         <input class="btn btn-danger btn-block" type="submit" value="{{ trans('account.delete_btn') }}" data-confirm="{{ trans('account.delete') }}">

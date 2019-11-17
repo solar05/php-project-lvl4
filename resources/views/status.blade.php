@@ -10,7 +10,7 @@
             @if(in_array($status->name, ['created', 'in_work', 'testing', 'completed']))
                 {{ trans('state.permission_denied') }}
             @else
-                <form method="post" action="{{ route('statuses.update', $status->id) }}">
+                <form method="post" action="{{ route('statuses.update', $status) }}">
                     @method('patch')
                     @csrf
                     <div class="form-group row">
