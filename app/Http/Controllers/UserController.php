@@ -6,7 +6,6 @@ use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 use Task_Manager\Task;
 use Task_Manager\User;
-use Validator;
 
 class UserController extends Controller
 {
@@ -99,7 +98,7 @@ class UserController extends Controller
             return back()
                 ->withErrors([trans('account.failure_update')]);
         }
-        return redirect(route('users.show', $user['id']))->with('status', trans('account.success_update'));
+        return redirect(route('users.show', $user))->with('status', trans('account.success_update'));
     }
 
     /**

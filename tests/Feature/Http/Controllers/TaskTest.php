@@ -54,13 +54,13 @@ class TaskTest extends TestCase
 
     public function testTaskShow()
     {
-        $response = $this->get(route('tasks.show', $this->task->id));
+        $response = $this->get(route('tasks.show', $this->task));
         $response->assertOk();
     }
 
     public function testTaskDestroy()
     {
-        $response = $this->delete(route('tasks.destroy', $this->task->id));
+        $response = $this->delete(route('tasks.destroy', $this->task));
         $response->assertRedirect();
         $this->assertDatabaseMissing('tasks', [
             'name' => $this->task->name,
@@ -77,7 +77,7 @@ class TaskTest extends TestCase
             'tags' => 'change',
             'assignedTo' => $newUser['name']
         ];
-        $response = $this->patch(route('tasks.update', $this->task->id), $newTaskData);
+        $response = $this->patch(route('tasks.update', $this->task), $newTaskData);
         $response->assertRedirect();
         $this->assertDatabaseHas('tasks', [
             'id' => $this->task->id,

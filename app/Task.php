@@ -35,8 +35,9 @@ class Task extends Model
 
     public static function getCompletedUserTasksCount($userId)
     {
-        return  $userTasks = Task::where('assigned_to_id', $userId)
-            ->whereIn('status_id', [4])
+        return Task::with(['assignedTo'])
+            ->assignedToUser(Auth::id())
+            ->withStatus(TaskStatus::STATUS_COMPLETED)
             ->count();
     }
 

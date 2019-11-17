@@ -6,6 +6,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class TaskStatus extends Model
 {
+    const STATUS_CREATED = 1;
+    const STATUS_IN_WORK = 2;
+    const STATUS_TESTING = 3;
+    const STATUS_COMPLETED = 4;
+
     protected $fillable = ['name'];
 
     public function tasks()

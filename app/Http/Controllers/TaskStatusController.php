@@ -6,7 +6,6 @@ use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 use Task_Manager\TaskStatus;
 use Task_Manager\TaskStatus as Status;
-use Illuminate\Support\Facades\Validator;
 
 class TaskStatusController extends Controller
 {
