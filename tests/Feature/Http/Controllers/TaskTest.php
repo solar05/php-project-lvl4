@@ -5,8 +5,6 @@ namespace Tests\Feature;
 use Task_Manager\Task;
 use Task_Manager\User;
 use Tests\TestCase;
-use Illuminate\Support\Facades\Hash;
-
 
 class TaskTest extends TestCase
 {
@@ -19,13 +17,7 @@ class TaskTest extends TestCase
     public function setUp(): void
     {
         parent::setUp();
-        $this->password = 'Very secret';
-        $this->userData = [
-            'name' => 'John Doe',
-            'email' => 'example@mail.test',
-            'password' => Hash::make($this->password)
-        ];
-        $this->user = factory(User::class)->create($this->userData);
+        $this->user = factory(User::class)->create();
         $this->taskData = [
             'name' => 'Test',
             'description' => 'Testing task',
@@ -33,7 +25,7 @@ class TaskTest extends TestCase
             'assignedTo' => $this->user['name']
         ];
         $this->actingAs($this->user);
-        $this->task = factory(Task::class, 1)->create()->first();
+        $this->task = factory(Task::class)->create();
     }
 
     public function testTaskIndex()

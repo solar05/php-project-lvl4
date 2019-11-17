@@ -5,30 +5,20 @@ namespace Tests\Feature;
 use Task_Manager\TaskStatus;
 use Task_Manager\User;
 use Tests\TestCase;
-use Illuminate\Support\Facades\Hash;
-
 
 class TaskStatusTest extends TestCase
 {
     protected $user;
-    protected $password;
-    protected $userData;
     protected $statusData;
     protected $status;
 
     public function setUp(): void
     {
         parent::setUp();
-        $this->password = 'Very secret';
-        $this->userData = [
-            'name' => 'John Doe',
-            'email' => 'example@mail.test',
-            'password' => Hash::make($this->password)
-        ];
-        $this->user = factory(User::class)->create($this->userData);
+        $this->user = factory(User::class)->create();
         $this->actingAs($this->user);
         $this->statusData = ['name' => 'Some status'];
-        $this->status = factory(TaskStatus::class, 1)->create()->first();
+        $this->status = factory(TaskStatus::class)->create();
     }
 
     public function testStatusIndex()
