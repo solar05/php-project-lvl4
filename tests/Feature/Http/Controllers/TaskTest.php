@@ -60,7 +60,7 @@ class TaskTest extends TestCase
 
     public function testTaskEdit()
     {
-        $newUser = factory(User::class, 1)->create()->first();
+        $newUser = factory(User::class)->create();
         $newTaskData = [
             'name' => 'New',
             'description' => 'Changed name',
