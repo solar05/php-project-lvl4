@@ -71,7 +71,7 @@
                         <a href="{{ route('tasks.show', $task) }}">{{ $task->name }}</a>
                     </td>
                     <td>
-                        @include('layouts.state', ['statuses.show' => $task->status])
+                        @include('layouts.state', ['status' => $task->status])
                     </td>
                     <td>
                         @foreach($task->tags as $tag)

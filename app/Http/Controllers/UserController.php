@@ -6,6 +6,7 @@ use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 use Task_Manager\Task;
 use Task_Manager\User;
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
@@ -55,9 +56,11 @@ class UserController extends Controller
     public function show(User $user)
     {
         $completedTasksCount = Task::getCompletedUserTasksCount($user['id']);
+        $canUpdate = Auth::id() == $user['id'];
         return view('user.show', [
             'user' => $user,
-            'completedTasksCount' => $completedTasksCount
+            'completedTasksCount' => $completedTasksCount,
+            'canUpdate' => $canUpdate
         ]);
     }
 

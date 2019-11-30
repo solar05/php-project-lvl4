@@ -30,7 +30,7 @@ class HomeController extends Controller
         $usersNames = User::all()->pluck('name')->toArray();
         $statuses = TaskStatus::all();
         $userTasks = Task::where('assigned_to_id', $user['id'])
-            ->whereNotIn('status_id', [4])
+            ->whereNotIn('status_id', [TaskStatus::STATUS_COMPLETED])
             ->get();
         return view('user.index', ['userTasks' => $userTasks,
             'usersNames' => $usersNames,
