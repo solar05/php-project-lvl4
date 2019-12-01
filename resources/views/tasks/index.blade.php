@@ -71,7 +71,9 @@
                         <a href="{{ route('tasks.show', $task) }}">{{ $task->name }}</a>
                     </td>
                     <td>
-                        @include('layouts.state', ['status' => $task->status])
+                        <a href="{{route('statuses.show', $task->status)}}" class="{{ $task->status->present()->stateBadgeClass }}">
+                            {{ $task->status->present()->stateName }}
+                        </a>
                     </td>
                     <td>
                         @foreach($task->tags as $tag)

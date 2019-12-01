@@ -14,7 +14,11 @@
     @foreach($statuses as $status)
         <tr>
             <th>{{ $status->id }}</th>
-            <td>@include('layouts.state', ['statuses.show' => $status])</td>
+            <td>
+                <a href="{{route('statuses.show', $status)}}" class="{{ $status->present()->stateBadgeClass }}">
+                    {{ $status->present()->stateName }}
+                </a>
+            </td>
             <td>{{ $status->created_at }}</td>
             <td>{{ $status->updated_at }}</td>
             <td>

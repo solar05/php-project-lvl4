@@ -3,6 +3,8 @@
 namespace Task_Manager;
 
 use Illuminate\Database\Eloquent\Model;
+use Laracasts\Presenter\PresentableTrait;
+use Task_Manager\Traits\StatePresenter;
 
 class TaskStatus extends Model
 {
@@ -12,6 +14,10 @@ class TaskStatus extends Model
     const STATUS_COMPLETED = 4;
 
     protected $fillable = ['name'];
+
+    use PresentableTrait;
+
+    protected $presenter = StatePresenter::class;
 
     public function tasks()
     {

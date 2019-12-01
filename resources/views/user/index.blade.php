@@ -21,7 +21,9 @@
                                         </h5>
                                     </td>
                                     <td align="right">
-                                        @include('layouts.state', ['status' => $task->status])
+                                        <a href="{{route('statuses.show', $task->status)}}" class="{{ $task->status->present()->stateBadgeClass }}">
+                                            {{ $task->status->present()->stateName }}
+                                        </a>
                                     </td>
                                 </tr>
                             @endforeach

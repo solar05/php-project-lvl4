@@ -4,7 +4,9 @@
 <div class="container">
     <div class="card">
         <div class="card-header">
-            @include('layouts.state', ['stateId' => $status->id, 'stateName' => $status->name])
+            <a href="{{route('statuses.show', $status)}}" class="{{ $status->present()->stateBadgeClass }}">
+                {{ $status->present()->stateName }}
+            </a>
         </div>
         <div class="card-body">
             @if(in_array($status->name, ['created', 'in_work', 'testing', 'completed']))

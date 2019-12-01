@@ -20,7 +20,10 @@
                 </tr>
                 <tr>
                     <th>
-                        {{ trans('task.state') }}: @include('layouts.state', ['status' => $task->status])
+                        {{ trans('task.state') }}:
+                        <a href="{{route('statuses.show', $task->status)}}" class="{{ $task->status->present()->stateBadgeClass }}">
+                            {{ $task->status->present()->stateName }}
+                        </a>
                     </th>
                 </tr>
                 <tr>
