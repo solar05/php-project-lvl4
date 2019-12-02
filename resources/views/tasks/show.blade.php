@@ -47,7 +47,7 @@
             </table>
         </div>
     </div>
-        @if(Auth::user()->isTaskCreator($creator))
+        @if($creator->canUpdate())
             <div class="card">
                 <div class="card-header">
                     {{ trans('task.update') }}

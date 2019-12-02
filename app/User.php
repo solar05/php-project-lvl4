@@ -55,9 +55,4 @@ class User extends Authenticatable
     {
         return $this->id == Auth::id();
     }
-
-    public function isTaskCreator(User $user)
-    {
-        return $user['id'] == $this->id;
-    }
 }
