@@ -56,11 +56,9 @@ class UserController extends Controller
     public function show(User $user)
     {
         $completedTasksCount = Task::getCompletedUserTasksCount($user['id']);
-        $canUpdate = Auth::id() == $user['id'];
         return view('user.show', [
             'user' => $user,
-            'completedTasksCount' => $completedTasksCount,
-            'canUpdate' => $canUpdate
+            'completedTasksCount' => $completedTasksCount
         ]);
     }
 
