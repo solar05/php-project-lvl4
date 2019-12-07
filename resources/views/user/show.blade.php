@@ -29,7 +29,7 @@
             </div>
         </div>
     </div>
-    @if($user->canUpdate())
+    @if(Auth::user()->can('update', $user))
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card">
@@ -62,6 +62,8 @@
                 </div>
             </div>
         </div>
+    @endif
+    @if(Auth::user()->can('delete', $user))
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card">

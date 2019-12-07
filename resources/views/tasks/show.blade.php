@@ -47,7 +47,7 @@
             </table>
         </div>
     </div>
-        @if($creator->canUpdate())
+        @if(Auth::user()->can('update', $task))
             <div class="card">
                 <div class="card-header">
                     {{ trans('task.update') }}
@@ -106,6 +106,8 @@
                     </form>
                 </div>
             </div>
+    @endif
+    @if(Auth::user()->can('delete', $task))
             <div class="card">
                 <div class="card-header">
                     {{ trans('task.delete') }}

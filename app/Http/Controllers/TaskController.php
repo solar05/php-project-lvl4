@@ -71,9 +71,9 @@ class TaskController extends Controller
         }
         $preparedTags = Tag::prepareTags(trim($attributes['tags']));
         $task->status()->associate($state);
-        $task->creator()->associate(Auth::user()['id']);
+        $task->creator()->associate(Auth::user());
         $userToAssign = User::where('name', '=', $attributes['assignedTo'])->firstOrFail();
-        $task->assignedTo()->associate($userToAssign['id']);
+        $task->assignedTo()->associate($userToAssign);
         $task->save();
         foreach ($preparedTags as $tag) {
             $task->tags()->attach($tag->id);
@@ -136,7 +136,7 @@ class TaskController extends Controller
             $task->status()->associate($state);
         }
         $userToAssign = User::where('name', '=', $attributes['assignedTo'])->firstOrFail();
-        $task->assignedTo()->associate($userToAssign['id']);
+        $task->assignedTo()->associate($userToAssign);
         if (!empty($attributes['tags'])) {
             $preparedTags = Tag::prepareTags(trim($attributes['tags']));
             $task->tags()->detach();
