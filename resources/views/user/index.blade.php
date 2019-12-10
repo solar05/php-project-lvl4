@@ -67,7 +67,7 @@
                                 <select name="status" class="browser-default custom-select">
                                     <option selected disabled></option>
                                     @foreach($statuses as $status)
-                                        <option value="{{ $status->name }}">{{ $status->name }}</option>
+                                        <option value="{{ $status->id }}">{{ $status->name }}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -76,8 +76,8 @@
                             <label for="assignedTo" class="col-md-4 col-form-label text-md-right">{{ trans('task.assigned') }}</label>
                             <div class="col-md-6">
                                 <select name="assignedTo" class="browser-default custom-select">
-                                @foreach($usersNames as $userName)
-                                    <option value="{{ $userName }}">{{ $userName }}</option>
+                                @foreach($users as $user)
+                                    <option value="{{ $user->id }}">{{ $user->name }}</option>
                                 @endforeach
                                 </select>
                             </div>

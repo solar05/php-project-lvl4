@@ -67,17 +67,15 @@ class TaskController extends Controller
         if (!isset($attributes['status'])) {
             $state = TaskStatus::getCreatedState();
         } else {
-            $state = TaskStatus::firstOrCreate(['name' => $attributes['status']]);
+            $state = TaskStatus::findOrFail($attributes['status']);
         }
         $preparedTags = Tag::prepareTags(trim($attributes['tags']));
         $task->status()->associate($state);
         $task->creator()->associate(Auth::user());
-        $userToAssign = User::where('name', '=', $attributes['assignedTo'])->firstOrFail();
+        $userToAssign = User::findOrFail($attributes['assignedTo']);
         $task->assignedTo()->associate($userToAssign);
         $task->save();
-        foreach ($preparedTags as $tag) {
-            $task->tags()->attach($tag->id);
-        }
+        $task->tags()->sync($preparedTags);
         return redirect(route('tasks.index'))->with('status', trans('task.created'));
     }
 
@@ -91,13 +89,13 @@ class TaskController extends Controller
     {
         $creator = User::findOrFail($task['creator_id']);
         $performer = User::findOrFail($task['assigned_to_id']);
-        $usersNames = User::all()->pluck('name')->toArray();
+        $users = User::all();
         $statuses = TaskStatus::all();
         return view('tasks.show', ['task' => $task,
             'creator' => $creator,
             'performer' => $performer,
             'tags' => $task->Tags,
-            'usersNames' => $usersNames,
+            'users' => $users,
             'statuses' => $statuses
         ]);
     }
@@ -132,18 +130,16 @@ class TaskController extends Controller
             'description' => $attributes['description']
         ]);
         if (isset($attributes['status'])) {
-            $state = TaskStatus::firstOrCreate(['name' => $attributes['status']]);
+            $state = TaskStatus::findOrFail($attributes['status']);
             $task->status()->associate($state);
         }
-        $userToAssign = User::where('name', '=', $attributes['assignedTo'])->firstOrFail();
+        $userToAssign = User::findOrFail($attributes['assignedTo']);
         $task->assignedTo()->associate($userToAssign);
         if (!empty($attributes['tags'])) {
             $preparedTags = Tag::prepareTags(trim($attributes['tags']));
             $task->tags()->detach();
             $task->save();
-            foreach ($preparedTags as $tag) {
-                $task->tags()->attach($tag->id);
-            }
+            $task->tags()->sync($preparedTags);
         } else {
             $task->save();
         }
@@ -158,11 +154,8 @@ class TaskController extends Controller
      */
     public function destroy(Task $task)
     {
-        try {
-            $task->delete();
-        } catch (\Exception $e) {
-            return back()->withErrors(trans('task.delete_err'));
-        }
+        $task->tags()->detach();
+        $task->delete();
         return redirect(route('tasks.index'))->with('status', trans('task.deleted'));
     }
 }

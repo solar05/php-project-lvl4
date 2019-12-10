@@ -110,11 +110,7 @@ class UserController extends Controller
      */
     public function destroy(User $user)
     {
-        try {
-            $user->delete();
-        } catch (\Exception $error) {
-            return back()->withErrors([trans('account.failure_delete')]);
-        }
+        $user->delete();
         return redirect(route('welcome'))->with('status', trans('account.success_delete'));
     }
 }

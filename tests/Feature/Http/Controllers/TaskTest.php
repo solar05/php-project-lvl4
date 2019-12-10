@@ -20,7 +20,7 @@ class TaskTest extends TestCase
             'name' => 'Test',
             'description' => 'Testing task',
             'tags' => 'TEsT taGS',
-            'assignedTo' => $this->user['name']
+            'assignedTo' => $this->user['id']
         ];
         $this->actingAs($this->user);
         $this->task = factory(Task::class)->create();
@@ -65,7 +65,7 @@ class TaskTest extends TestCase
             'name' => 'New',
             'description' => 'Changed name',
             'tags' => 'change',
-            'assignedTo' => $newUser['name']
+            'assignedTo' => $newUser['id']
         ];
         $response = $this->patch(route('tasks.update', $this->task), $newTaskData);
         $response->assertRedirect();

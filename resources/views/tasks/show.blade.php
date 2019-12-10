@@ -82,7 +82,7 @@
                                         @if($status->name == $task->status->name)
                                             <option selected value="">{{ $status->name }}</option>
                                         @else
-                                            <option value="{{ $status->name }}">{{ $status->name }}</option>
+                                            <option value="{{ $status->id }}">{{ $status->name }}</option>
                                         @endif
                                     @endforeach
                                 </select>
@@ -92,11 +92,11 @@
                             <label for="assignedTo" class="col-md-4 col-form-label text-md-right">{{ trans('task.assigned') }}</label>
                             <div class="col-md-6">
                                 <select name="assignedTo" class="browser-default custom-select">
-                                    @foreach($usersNames as $userName)
-                                        @if($performer->name == $userName)
-                                            <option selected value="{{ $userName }}">{{ $userName }}</option>
+                                    @foreach($users as $user)
+                                        @if($performer->name == $user)
+                                            <option selected value="{{ $user->id }}">{{ $user->name }}</option>
                                         @else
-                                            <option value="{{ $userName }}">{{ $userName }}</option>
+                                            <option value="{{ $user->id }}">{{ $user->name }}</option>
                                         @endif
                                     @endforeach
                                 </select>

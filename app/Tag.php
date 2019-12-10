@@ -20,7 +20,7 @@ class Tag extends Model
             $trimmedTag = trim($tag);
             $tagToSave = Tag::firstOrCreate(['name' => mb_strtolower($trimmedTag)]);
             $tagToSave->save();
-            $acc[] = $tagToSave;
+            $acc[] = $tagToSave->id;
             return $acc;
         }, []);
     }

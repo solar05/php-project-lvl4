@@ -27,13 +27,13 @@ class HomeController extends Controller
     public function index()
     {
         $user = Auth::user();
-        $usersNames = User::all()->pluck('name')->toArray();
+        $users = User::all();
         $statuses = TaskStatus::all();
         $userTasks = Task::where('assigned_to_id', $user['id'])
             ->whereNotIn('status_id', [TaskStatus::STATUS_COMPLETED])
             ->get();
         return view('user.index', ['userTasks' => $userTasks,
-            'usersNames' => $usersNames,
+            'users' => $users,
             'statuses' => $statuses]);
     }
 

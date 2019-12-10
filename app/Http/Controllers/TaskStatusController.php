@@ -107,11 +107,7 @@ class TaskStatusController extends Controller
         if (TaskStatus::isSystemStatus($status['name'])) {
             return back()->withErrors(trans('state.delete_system'));
         }
-        try {
-            $status->delete();
-        } catch (QueryException $error) {
-            return back()->withErrors(trans('state.delete_failed'));
-        }
+        $status->delete();
         return redirect(route('statuses.index'))
             ->with('status', trans('state.delete_successful'));
     }
