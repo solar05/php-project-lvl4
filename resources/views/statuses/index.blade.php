@@ -22,7 +22,7 @@
             <td>{{ $status->created_at }}</td>
             <td>{{ $status->updated_at }}</td>
             <td>
-                @if(!in_array($status->name, ['created', 'in_work', 'testing', 'completed']))
+                @if(Auth::user()->can('delete', $status))
                     <form action="{{ route('statuses.destroy', $status) }}" method="post">
                         @method('delete')
                         @csrf

@@ -9,9 +9,7 @@
             </a>
         </div>
         <div class="card-body">
-            @if(in_array($status->name, ['created', 'in_work', 'testing', 'completed']))
-                {{ trans('state.permission_denied') }}
-            @else
+            @if(Auth::user()->can('update', $status))
                 <form method="post" action="{{ route('statuses.update', $status) }}">
                     @method('patch')
                     @csrf
@@ -25,6 +23,8 @@
                         <input class="btn btn-primary btn-block" type="submit" value="{{ trans('state.update') }}">
                     </div>
                 </form>
+            @else
+                {{ trans('state.permission_denied') }}
             @endif
         </div>
     </div>

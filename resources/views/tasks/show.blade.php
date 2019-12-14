@@ -36,12 +36,12 @@
                 </tr>
                 <tr>
                     <th>
-                        {{trans('task.creator')}}: <a href="{{route('users.show', $creator)}}">{{ $creator['name']}}</a>
+                        {{trans('task.creator')}}: <a href="{{route('users.show', $creator)}}">{{ $creator->name}}</a>
                     </th>
                 </tr>
                 <tr>
                     <th>
-                        {{trans('task.assigned')}}: <a href="{{route('users.show', $performer)}}">{{ $performer['name']}}</a>
+                        {{trans('task.assigned')}}: <a href="{{route('users.show', $performer)}}">{{ $performer->name}}</a>
                     </th>
                 </tr>
             </table>
@@ -79,7 +79,7 @@
                             <div class="col-md-6">
                                 <select name="status" class="browser-default custom-select">
                                     @foreach($statuses as $status)
-                                        @if($status->name == $task->status->name)
+                                        @if($status->id == $task->status->id)
                                             <option selected value="">{{ $status->name }}</option>
                                         @else
                                             <option value="{{ $status->id }}">{{ $status->name }}</option>
@@ -93,7 +93,7 @@
                             <div class="col-md-6">
                                 <select name="assignedTo" class="browser-default custom-select">
                                     @foreach($users as $user)
-                                        @if($performer->name == $user)
+                                        @if($performer->id == $user->id)
                                             <option selected value="{{ $user->id }}">{{ $user->name }}</option>
                                         @else
                                             <option value="{{ $user->id }}">{{ $user->name }}</option>
