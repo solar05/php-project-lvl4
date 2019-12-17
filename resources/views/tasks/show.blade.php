@@ -79,7 +79,7 @@
                             <div class="col-md-6">
                                 <select name="status" class="browser-default custom-select">
                                     @foreach($statuses as $status)
-                                        @if($status->id == $task->status->id)
+                                        @if($status == $task->status)
                                             <option selected value="">{{ $status->name }}</option>
                                         @else
                                             <option value="{{ $status->id }}">{{ $status->name }}</option>
@@ -93,7 +93,7 @@
                             <div class="col-md-6">
                                 <select name="assignedTo" class="browser-default custom-select">
                                     @foreach($users as $user)
-                                        @if($performer->id == $user->id)
+                                        @if($performer == $user)
                                             <option selected value="{{ $user->id }}">{{ $user->name }}</option>
                                         @else
                                             <option value="{{ $user->id }}">{{ $user->name }}</option>

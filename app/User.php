@@ -50,9 +50,4 @@ class User extends Authenticatable
     {
         return $this->hasMany('Task_Manager\Task', 'assigned_to_id');
     }
-
-    public function canUpdate()
-    {
-        return $this->id == Auth::id();
-    }
 }
