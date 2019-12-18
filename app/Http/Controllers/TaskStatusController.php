@@ -105,7 +105,8 @@ class TaskStatusController extends Controller
     public function destroy(TaskStatus $status)
     {
         if (TaskStatus::isSystemStatus($status['name'])) {
-            return back()->withErrors(trans('state.delete_system'));
+            return redirect(route('statuses.index'))
+                ->with('status', trans('state.delete_system'));
         }
         $status->delete();
         return redirect(route('statuses.index'))
