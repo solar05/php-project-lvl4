@@ -4383,7 +4383,7 @@ postcss-selector-parser@^3.0.0:
   version "3.1.1"
   resolved "https://registry.yarnpkg.com/postcss-selector-parser/-/postcss-selector-parser-3.1.1.tgz#4f875f4afb0c96573d5cf4d74011aee250a7e865"
   dependencies:
-    dot-prop "^4.1.1"
+    dot-prop "^4.2.1"
     indexes-of "^1.0.1"
     uniq "^1.0.1"
 
